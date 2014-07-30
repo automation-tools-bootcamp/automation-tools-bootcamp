@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Intro to Jenkins</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Developer Automation Tools Bootcamp</h1>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="introduction-to-jenkins" class="anchor" href="#introduction-to-jenkins"><span class="octicon octicon-link"></span></a>Introduction to Jenkins</h3>
+
+<p><img src="images/jenkins.png" />
+<br />"An extendable open source continuous integration server" <a href="http://www.jenkins-ci.org" target="_new">Jenkins is open source</a> and watched over by creator <a href="http://kohsuke.org/about/" target="_new">Kohsuke Kawaguchi</a><br />
+<br />
+<a href="https://wiki.jenkins-ci.org/display/JENKINS/Use+Jenkins" target="_new">Using Jenkins</a><br />
+<br />
+I love to use Jenkins because of this philosophy "<a href="http://evan.bottch.com/2010/05/26/continuous-integration-if-something-hurts-do-it-more-often/" target="_new">If something hurts, do it more often</a>".  Build up your endurance and make the action so common place you don't notice it anymore.  Automating repetitive tasks with Jenkins my favorite way to make things common place.
+</p>
+
+<h3><a name="build-your-project" class="anchor" href="#build-your-project"><span class="octicon octicon-link"></span></a>How to build your project</h3>
+<p>
+Here's the secret about Jenkins.  Jenkins is just doing what you do locally to build your app.<br />
+<br />
+You're building a Java app with Maven?  That's all Jenkins is doing too.  Running the same exact <code>mvn</code> command as you.  Your build engineers are not mind readers.  They'll need to learn what you know and what you've built.<br />
+<br />
+Got a half dozen special args, you still need to pass them to Maven in Jenkins.  Jenkins is magical, but not *that* magical.<br />
+<br />
+Using Ant, Gradle or any shell script your team has to run your build.  Jenkins can support that by checking it out and running your build commands.<br />
+<br />
+Same thing for node.js (with Grunt or Gulp task runners).<br />
+<br />
+What you do locally to build your app is what you will have Jenkins configured to do.<br />
+<br />
+After the initial setup, Jenkins jobs can be automated as much as the law allows.
+<ol>
+  <li>Check code in</li>
+  <li>It is built</li>
+  <li>It is deployed</li>
+  <li>The app server is bounced</li>
+  <li>Integration tests verify the deployed app</li>
+  <li>Deploy app to next shared app in your build pipeline. Dev -> QA or QA -> Stage etc.</li>
+</ol>
+Raise your hand if you want to do any of that manually?<br />
+<br />
+With Jenkins you do step 1 and watch the rest happen.
+</p>
+
+<h3><a name="what-else" class="anchor" href="#what-else"><span class="octicon octicon-link"></span></a>What else does Jenkins do?</h3>
+<p>
+More like - what doesn't Jenkins do? #amirite<br />
+<br />
+The in built functionality for building your application is arguably trumped by the added functionality of the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Plugins" target="_new">922 (and growing) plugins</a> that exist for Jenkins servers.
+<br />
+Like I said with npm (and Chef before that) in the previous meetings - it's all been done before!<br />
+But some plugins are better than others. Check for key stats like
+<ul>
+  <li>Number of downloads</li>
+  <li>Last updated</li>
+</ul>
+How to install a plugin?
+<ul>
+  <li>Start with the web interface for your server</li>
+  <li>Graduate to <a href="https://github.com/opscode-cookbooks/jenkins#jenkins_plugin" target="_new">managing your plugins with Chef</a>!</li>
+</ul>
+What are some great plugins?
+<ul>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/SCM+Sync+configuration+plugin" target="_new">SCM Sync Configuration</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Active+Directory+Plugin" target="_new">Active Directory</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Jabber+Plugin" target="_new">Jabber Integration</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/JIRA+Plugin" target="_new">Jira Integration</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Artifactory+Plugin" target="_new">Artifactory Integration</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_new">Git</a>/<a href="https://wiki.jenkins-ci.org/display/JENKINS/Perforce+Plugin" target="_new">Perforce</a></li>
+  <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Embeddable+Build+Status+Plugin" target="_new">Embeddable-build-status</a></li>
+</p>
+<h3><a name="install-it" class="anchor" href="#install-it"><span class="octicon octicon-link"></span></a>Up and running with Jenkins</h3>
+<p>
+  <ol>
+    <li><a href="http://jenkins-ci.org/" target="_new">Download the jar</a></li>
+    <li><code>java -jar jenkins.war</code></li>
+    <li><a href="http://localhost:8080" target="_new">Load Jenkins</a></li>
+    <li>Create a job
+      <ul>
+        <li>Pick your source code location</li>
+        <li>Set how often to look for source code changes</li>
+        <li>Execute your build command(s)</li>
+        <li>Execute your post build steps</li>
+      </ul>
+    </li>
+  </ol>
+You'll be up and running - waiting for commits.<br />
+<br />
+But you might be configuring your build jobs for days to get things tweaked just right!
+</p>
+
+<h3><a name="jenkins-gotchas" class="anchor" href="#jenkins-gotchas"><span class="octicon octicon-link"></span></a>Jenkins Challenges</h3>
+<ul>
+  <li>Use the Long Term Support version for critical build servers</li>
+  <li>Jenkins runs as a user on the build server. With their own SSH keys, etc.</li>
+  <li>If you're using Node.js/Ruby/Python you need to install that on the build server, and put it in the $PATH</li>
+  <li>Creating new build jobs.  This can be scripted with plugins</li>
+</ul>
+
+<h3><a name="advanced-jenkins" class="anchor" href="#advanced-jenkins"><span class="octicon octicon-link"></span></a>Further Jenkins learning</h3>
+<p>
+  Cuddle up with a nice book.<br />
+  <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=tylfit-20&marketplace=amazon&region=US&placement=1849517401&asins=1849517401&linkId=GFX33YXSG4DJO5DN&show_border=true&link_opens_in_new_window=true">
+</iframe> <br /> Will walk you through server setup and give you numerous examples of setting up very precise features in Jenkins with both in built features and plugins.  Highly recommended.<br />
+  <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=tylfit-20&marketplace=amazon&region=US&placement=0321601912&asins=0321601912&linkId=CGG7BOHOMGLPINVI&show_border=true&link_opens_in_new_window=true">
+</iframe> <br />"Continous Delivery" is like a fire hose of info to take in.  Read it, learn it, love it.  But to execute on it - pick just one small thing from one chapter you can do to improve your workflow.  Rinse and repeat. Which sounds exactly like what?  Agile software development.  Small chunks, quick feedback and evaluation.
+</p>
+
+<!--
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+-->
+
+<h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Install Jenkins on your machine or on a Vagrant VM</li>
+  <li>Create a job that runs a local shell command, verify output.</li>
+  <li>Checkout <a href="https://github.com/jenkinsci/jenkins" target="_new">a project from github.com</a></li>
+  <li>Build that project</li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./github.html">Intro to GitHub</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (@tfitch).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  
+  </body>
+</html>

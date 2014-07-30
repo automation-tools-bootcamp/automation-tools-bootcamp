@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Intro to Enterprise Github</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Developer Automation Tools Bootcamp</h1>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="introduction-to-github" class="anchor" href="#introduction-to-github"><span class="octicon octicon-link"></span></a>Introduction to GitHub/Git</h3>
+
+<p>This content is geared towards the GitHub offerings with Git, but the general practices of workflows with Git can be applied to using GitLab, Stash or any other code hosting repository.  I'm simply more familiar with GitHub so presenting examples based on that.<br />
+  <br />
+  <a href="https://www.atlassian.com/git" target="_new">Great overview of Git from Atlassian</a><br />
+  <br />
+  There are multiple work flows that users can adopt when using Git.  We'll look at two here - <a href="#fork-pull-request">Fork + Pull Request</a> and <a href="#git-flow">Git Flow</a>.  Picking the right one for your project won't be too difficult.
+
+<h3>
+<a name="git-benefits" class="anchor" href="#git-benefits"><span class="octicon octicon-link"></span></a>Benefits of Git/GitHub</h3>
+<ul>
+  <li>"Offline" Support</li>
+  <li>Quick branching</li>
+  <li>Use in Open Source Software projects</li>
+  <li>Multiple client options - check out <a href="http://www.sourcetreeapp.com/" target="_new">SourceTree</a> it is free!</li>
+  <li>GitHub Bonus: Gists (think pastebin)</li>
+  <li>Tip: What's going on with my repo right now?<pre><code>git status</code></pre></li>
+</ul>
+
+<!--
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+-->
+
+
+<h3>
+<a name="fork-pull-request" class="anchor" href="#fork-pull-request"><span class="octicon octicon-link"></span></a>Fork + Pull Request Workflow</h3>
+
+<p>
+  This is GitHub's baby, we'll go to <a href="https://help.github.com/articles/using-pull-requests" target="_new">their Pull Request documentation</a> to explain it.<br />
+  <img src="images/gatekeeper.png" alt="from: http://killzoneauthors.blogspot.com/2012/06/you-are-your-own-gatekeeper.html#.Ux4jx_SwJ3N" />
+  <br />
+  The gist of Fork + Pull Request is the code repo will have a "Gate Keeper" approving merges.  You can have multiple approvers.  This *should* ensure you've had a code review.  If you blindly accept all Pull Requests then the code review part is out the door.<br />
+  You can receive patches from external entities.  This is how just about every Open Source project on GitHub works.
+</p>
+
+<h3>
+<a name="git-flow" class="anchor" href="#git-flow"><span class="octicon octicon-link"></span></a>Git Flow</h3>
+
+<p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_new">Git Flow</a> is predicated on the idea that the trunk/master branch is always live.  Any check-in to the master branch is reviewed, tested and ready to go live.<br />  So - where does all the work happen?  In feature branches, which are integrated in to the develop branch.  The release branch is cut from develop, verified and then merged to master for every release.<br />
+  <a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_new"Documented over at nvie.com</a> - as well as <a href="http://nvie.com/posts/a-git-flow-screencast/" target="_new">a screencast</a>.<br />
+  SourceTree has <a href="http://blog.sourcetreeapp.com/2012/08/01/smart-branching-with-sourcetree-and-git-flow/" target="_new">push button Git Flow support</a>.
+  <img src="images/git-flow.png" />
+  </p>
+
+<h3>
+<a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Send a Pull Request with your name added to the Attendee list of the README for this code depot. Hint: you can do this entirely in the browser</li>
+  <li>Install SourceTree.  Use Git Flow to create a Release of your own repo, or fork this repo and create a Release.</li>
+</ol>
+
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./github.html">Intro to GitHub</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (@tfitch).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  
+  </body>
+</html>

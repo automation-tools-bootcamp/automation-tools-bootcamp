@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Intro to Vagrant</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Developer Automation Tools Bootcamp</h1>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="introduction-to-vagrant" class="anchor" href="#introduction-to-vagrant"><span class="octicon octicon-link"></span></a>Introduction to Vagrant</h3>
+
+<p><img src="images/vagrant_chilling.png" />
+<br />"Develop Environments Made Easy" <a href="http://www.vagrantup.com" target="_new">Vagrant by Hashicorop</a><br />
+<br />
+<a href="http://docs.vagrantup.com/v2/getting-started/index.html" target="_new">Getting Started</a><br />
+<br />
+A vagrant stereotypically lives in a box.  The vagrant tool is built to manage all your "boxes" (VMs/servers).<br />
+<br />
+<a href="http://twitter.com/mitchellh" target="_new">Mitchell Hashimoto</a> created Vagrant and can explain it best.  <a href="https://www.youtube.com/watch?v=vk7hHhhIt10" target="_new">Here is a great high level description.</a> <br />
+<iframe width="640" height="360" src="https://www.youtube.com/embed/vk7hHhhIt10?rel=0" frameborder="0" allowfullscreen></iframe><br /></p>
+
+<!--
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+-->
+
+
+<h3>
+<a name="vagrant-benefits" class="anchor" href="#vagrant-benefits"><span class="octicon octicon-link"></span></a>Benefits of Vagrant</h3>
+<ul>
+  <li>Your local testing environment will match shared environments</li>
+  <li>No more "works for me" (because I'm running a different version of Java, etc)</li>
+  <li>Quick tear down and setup (aka - provisioning). You can break it, destroy it and start over until you tweak it just right.</li>
+  <li>With enough system resources you can replicate <a href="https://docs.vagrantup.com/v2/multi-machine/index.html" target="_new">an entire distributed app</a> (DB + app server + web server + load balancer)</a>
+  <li>Tip: What's going on with my Vagrant Box right now?<pre><code>vagrant status</code></pre></li>
+</ul>
+
+<h3>
+<a name="vagrant-setup" class="anchor" href="#vagrant-setup"><span class="octicon octicon-link"></span></a>Setting up Vagrant</h3>
+
+<p>
+<ol>
+  <li><a href="https://www.virtualbox.org/wiki/Downloads" target="_new">Install Virtualbox</a>***</li>
+  <li><a href="http://www.vagrantup.com/downloads.html" target="_new">Install Vagrant</a></li>
+  <li><a href="https://docs.vagrantup.com/v2/getting-started/index.html" target="_new">Create your Vagrantfile</a></li>
+</ol>
+*** <a href="http://www.vagrantup.com/vmware" target="_new">VMWare is an option with a Vagrant plugin that costs $79</a>.  It is highly recommended by Mitchell Hashimoto to use the VMWare option.  But the basic steps above are free.  Having a VMWare license is not the same as having the Vagrant VMWare plugin license.  They are two separate purchases you'd have to make.
+</p>
+
+<h3>
+<a name="vagrant-basics" class="anchor" href="#vagrant-basics"><span class="octicon octicon-link"></span></a>Vagrant Basics</h3>
+<pre><code>vagrant up        # boots the VM(s) defined in the Vagrantfile
+vagrant ssh       # connects to the VM via ssh.  That's it.  No IP needed.
+vagrant suspend   # sleeps the server
+vagrant halt      # shuts down the server
+vagrant destroy   # wipes the server away to nothing
+</code></pre>
+
+<h3>
+<a name="vagrant-options" class="anchor" href="#vagrant-options"><span class="octicon octicon-link"></span></a>Vagrant Configuration Options</h3>
+<ul>
+  <li><a href="https://vagrantcloud.com/" target="_new">Which box to use</a>? Ubuntu? CentOS? Windows? Which version?</li>
+  <li>Networking config</li>
+  <li>Syncing local folders to vm</li>
+  <li>Basic provisioning: Inline Shell scripts</li>
+  <li>Advanced provisioning: Chef</li>
+</ul>
+
+<h3>
+<a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Check out the <a href="TO-BE-IMPORTED/vagrant" target="_new">example Vagrantfiles</a></li>
+  <li>Start up a single Vagrant box.  Stop the Apache server from running <code>sudo service httpd stop</code></li>
+  <li>Start up the Vagrant cluster in the multi-box directory.  Login to the box web1 (<code>vagrant ssh web1</code>and ping the box web3 on IP address <code>192.168.50.30</code></li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./github.html">Intro to GitHub</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (@tfitch).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  
+  </body>
+</html>

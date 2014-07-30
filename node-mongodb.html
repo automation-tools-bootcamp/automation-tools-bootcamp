@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Intro to Node.js + MongoDB</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Developer Automation Tools Bootcamp</h1>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="introduction-to-node" class="anchor" href="#introduction-to-node"><span class="octicon octicon-link"></span></a>Introduction to Node.js + MongoDB</h3>
+
+<p><img src="images/nodelogo.png" />
+<br />"for easily building fast, scalable network applications" <a href="http://www.nodejs.org" target="_new">Node.js is sponsored by Joyent</a><br />
+<br />
+<a href="http://www.nodejs.org/download/" target="_new">Install Node.js</a><br />
+<a href="https://github.com/creationix/nvm" target="_new">On OS X/Ubuntu check out nvm - Node Version Manager</a><br />
+<a href="http://nodejs.org/api/synopsis.html" target="_new">Node.js Documentation</a><br />
+<br />
+Node.js is *NOT* just for server-side apps.  The Adobe Anyware Components team uses Node.js + <a href="http://gruntjs.com/" target="_new">Grunt</a> as their build process.  Node will uglify, minify and test their js code, but there's no "server" in those commands.
+</p>
+<h3><a name="npm" class="anchor" href="#npm"><span class="octicon octicon-link"></span></a>Node.js dependency management with npm</h3>
+<p>
+<br />
+The real power for Node, like other contemporary languages, comes from dependency management.  This enables rapid prototyping and experimentation.  Node.js dependency management is in the form of 'npm' - <a href="https://www.npmjs.org/" target="_new">Node Packaged Modules</a><br />
+<br />
+Like I said with Chef in the previous meeting - it's all been done before!<br />
+But some libraries are better than others. Check for key stats like
+<ul>
+  <li>Number of downloads</li>
+  <li>Number of stars</li>
+  <li>How often it is dependened upon</li>
+</ul>
+A npm <a href="https://www.npmjs.org/search?q=log4j" target="_new">search for log4j</a> returns a page full of results.  But this isn't Google, the first result may be most recently updated, but that doesn't mean it's the standard.  I liked the <a href="https://www.npmjs.org/package/log4js" target="_new">log4js module</a>.  It is popular and frequently downloaded (>20k times a day), but not the top result!<br />
+Soooo - npm makes you work for it a little bit.<br />
+<br />
+How to install a module?
+<ul>
+  <li><code>npm install</code> local or <code>-g</code> global install a single module</li>
+  <li>A local package is in the <code>node_modules</code> folder in your project</li>
+  <li>A global install will put the binary from npm in your $PATH</li>
+  <li>Your project's <a href="http://docs.nodejitsu.com/articles/getting-started/npm/what-is-the-file-package-json" target="_new"><code>package.json</code> file</a></li>
+  <li><code>--save-dev</code> or <code>--save</code> will update your package.json file and then <code>npm install</code></li>
+  <li>Sometimes you'll have to delete your <code>node_modules</code> folder when you're refactoring code</li>
+</ul>
+</p>
+<h3><a name="your-modules" class="anchor" href="#your-modules"><span class="octicon octicon-link"></span></a>YOUR <code>node_modules</code> ARE YOUR <code>node_modules</code>, NOT MINE!</h3>
+<p>
+Several modules will compile themselves for your machine.  So - checking the <code>node_modules</code> folder in to Git is a bad move.  Windows modules will not work on OS X.  OS X modules will not work in Linux.<br />
+<br />
+That said, if your build server (Jenkins) is running the same platform as you are deploying your application too, feel free to scp or rsync the <code>node_modules</code> directory when deploying your app.<br />
+<br />
+Long story short.  You'll have a line for <code>node_modules</code> in your projects <code>.gitignore</code> file.
+</p>
+
+<h3><a name="nodejs-benefits" class="anchor" href="#nodejs-benefits"><span class="octicon octicon-link"></span></a>Benefits of Node.js</h3>
+<ul>
+  <li>Generally all code in the app, client and server-side will be JavaScript.  Familiarity with JS enables developers to look at the whole stack.</li>
+  <li>Vibrant community - npm libraries are *generally* kept up to date. Or someone will fork it and pick up the torch.</li>
+  <li>Like Chef community, modules are mostly open source and on GitHub! Need a feature, <a href="https://github.com/beatfactor/nightwatch/issues/68" target="_new">ask for it</a> or create it and send the Pull Request.</li>
+  <li>Downside: JS developers (as a stereotype) *love* to reinvent the wheel...</li>
+</ul>
+<img src="images/nodejs_comic.png" />
+
+<h3><a name="nodejs-development" class="anchor" href="#nodejs-development"><span class="octicon octicon-link"></span></a>Developing with Node.js</h3>
+<p>
+  What's the life cycle for doing Node.js server-side app?
+  <ul>
+    <li>Run your app with with node. <code>node app.js</code></li>
+    <li>Until you make your first error...</li>
+    <li>Bring on <a href="https://www.npmjs.org/package/nodemon" target="_new"><code>nodemon</code></a> and <a href="https://www.npmjs.org/package/forever" target="_new"><code>forever</code></a>.  Which one is better?  The one that works for you.</li>
+    <li>And in Production environments? You'll want <a href="https://www.phusionpassenger.com/index2" target="_new">Passenger from Phusion</a>.  Which will hook in to nginx or Apache and ensure your node process is running and served out by a proper webserver.</li>
+  </ul>
+</p>
+
+<h3><a name="advanced-nodejs" class="anchor" href="#advanced-nodejs"><span class="octicon octicon-link"></span></a>Further Node.js learning</h3>
+<p>
+  Cuddle up with a nice book.<br />
+  <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=tylfit-20&marketplace=amazon&region=US&placement=1937785734&asins=1937785734&linkId=TFYCEJU5XHVNGYHR&show_border=true&link_opens_in_new_window=true">
+</iframe> <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=tylfit-20&marketplace=amazon&region=US&placement=1783282495&asins=1783282495&linkId=G6PKDIAM26GL3MO3&show_border=true&link_opens_in_new_window=true">
+</iframe>
+</p>
+
+<!--
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+-->
+<p>
+<img src="images/MongoDB_Logo.png" />
+</p>
+<h3>
+<a name="mongodb-benefits" class="anchor" href="#mongodb-benefits"><span class="octicon octicon-link"></span></a>Benefits of MongoDB</h3>
+<ul>
+  <li>Free! *cough* Oracle *cough*</li>
+  <li>Rapid application protoyping</li>
+  <li>Stores documents like JSON, so plays very well with JS apps</li>
+  <li>Scales vertically and horizontally</li>
+  <li><a href="http://docs.mongodb.org/manual/replication/" target="_new">Replication</a></li>
+  <li><a href="http://docs.mongodb.org/manual/sharding/" target="_new">Sharding</a></li>
+</ul>
+
+<h3><a name="mongodb-setup" class="anchor" href="#mongodb-setup"><span class="octicon octicon-link"></span></a>Setting up MongoDB</h3>
+
+<p>
+You love your terminal right?  Because MongoDB doesn't do much with GUI interfaces.
+<ol>
+  <li><a href="http://www.mongodb.org/downloads" target="_new">Install MongoDB</a></li>
+  <li><a href="http://docs.mongodb.org/manual/tutorial/getting-started/" target="_new">Getting started with MongoDB</a></li>
+</ol>
+</p>
+
+<h3><a name="mongodb-query" class="anchor" href="#mongodb-query"><span class="octicon octicon-link"></span></a>Querying MongoDB</h3>
+
+<p>
+Your data is in MongoDB.  You'll want to get it out.<br />
+<br />
+With Node.js I use the <code>mongodb</code> module. A query (find) looks like this<br />
+<code>
+string_collection.find()
+
+string_collection.find({stringCode:'developers',localeCode:'en'})</code>
+</p>
+
+<h3><a name="advanced-mongodb" class="anchor" href="#advanced-mongodb"><span class="octicon octicon-link"></span></a>Further MongoDB learning</h3>
+<p>
+  Enroll (for free) at <a href="https://university.mongodb.com/" target="_new">The MongoDB University</a>.<br />
+  <br />
+  Self-paced learning to use MongoDB in your preferred programming language (Node.js or Java), or learn to adminster a server.
+</p>
+
+
+<h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Check out the <a href="TO-BE-IMPORTED - sorry" target="_new">example app</a></li>
+  <li>Start up the Vagrant box. <code>vagrant up</code> and let Chef install Node.js and MongoDB for you.</li>
+  <li>SSH in to your Vagrant box. <code>vagrant ssh</code></li>
+  <li>Install your Node modules and start the app<br />
+    <code>cd /apps/node<br />
+    npm install<br />
+    node app.js</code></li>
+  <li>Install <code>nodemon</code> as a global module on the VM.  Run <code>app.js</code> using <code>nodemon</code></li>
+  <li>Add your name to the 'developers' section of the <code>app/routes/index.js</code> file query the REST API for it. <a href="http://localhost:3000/strings/developers/en" target="_new">Developers string group</a></li>
+  <li>Send your file change back as a Pull Request where you forked it from!</li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./github.html">Intro to GitHub</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (@tfitch).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
