@@ -13,7 +13,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Developer Automation Tools Bootcamp - Intro to Github</title>
+    <title>Developer Automation Tools Bootcamp - Intro to Git</title>
   </head>
 
   <body>
@@ -28,23 +28,27 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>
-<a name="introduction-to-github" class="anchor" href="#introduction-to-github"><span class="octicon octicon-link"></span></a>Introduction to GitHub/Git</h3>
+<h3><a name="introduction-to-github" class="anchor" href="#introduction-to-github"><span class="octicon octicon-link"></span></a>Introduction to Git</h3>
 
-<p>This content is geared towards the GitHub offerings with Git, but the general practices of workflows with Git can be applied to using GitLab, Stash or any other code hosting repository.  I'm simply more familiar with GitHub so presenting examples based on that.<br />
+<p>This is a quick introduction to Git.  Get code.  Edit code.  Check in code. Push Code.<br />
   <br />
   <a href="https://www.atlassian.com/git" target="_new">Great overview of Git from Atlassian</a><br />
   <br />
-  There are multiple work flows that users can adopt when using Git.  We'll look at two here - <a href="#fork-pull-request">Fork + Pull Request</a> and <a href="#git-flow">Git Flow</a>.  Picking the right one for your project won't be too difficult.
+  This does *not* cover branching.<br />
+  If you know the above stuff then hop on over to the fancy stuff in Git like available workflows that users can adopt when using Git.  You can look at two - <a href="./git-workflows.html#fork-pull-request">Fork + Pull Request</a> and <a href="./git-workflows.html#git-flow">Git Flow</a> on the <a href="./git-workflows.html">Git Workflows</a> section.  Pick the right one for your project and start coding.
+</p>
 
-<h3>
-<a name="git-benefits" class="anchor" href="#git-benefits"><span class="octicon octicon-link"></span></a>Benefits of Git/GitHub</h3>
+<h3><a name="git-benefits" class="anchor" href="#git-benefits"><span class="octicon octicon-link"></span></a>Benefits of Git/GitHub</h3>
 <ul>
   <li>"Offline" Support</li>
   <li>Quick branching</li>
+  <li>Only checking in some of your edited files</a>
+  <li><a href="http://git-scm.com/docs/gitignore" target="_new">.gitignore</a></li>
   <li>Use in Open Source Software projects</li>
   <li>Multiple client options - check out <a href="http://www.sourcetreeapp.com/" target="_new">SourceTree</a> it is free!</li>
   <li>GitHub Bonus: Gists (think pastebin)</li>
+  <li>GitHub repo browser plugin for Chrome called <a href="https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc?hl=en-US" target="_new">Octotree</a></li>
+  <li>Subjectively: Git makes me happy compared to other version control systems</li>
   <li>Tip: What's going on with my repo right now?<pre><code>git status</code></pre></li>
 </ul>
 
@@ -56,42 +60,83 @@ $ git checkout gh-pages
 -->
 
 
-<h3>
-<a name="fork-pull-request" class="anchor" href="#fork-pull-request"><span class="octicon octicon-link"></span></a>Fork + Pull Request Workflow</h3>
+<h3><a name="checkout" class="anchor" href="#checkout"><span class="octicon octicon-link"></span></a>Checkout a Git repository</h3>
 
 <p>
-  This is GitHub's baby, we'll go to <a href="https://help.github.com/articles/using-pull-requests" target="_new">their Pull Request documentation</a> to explain it.<br />
-  <img src="images/gatekeeper.png" alt="from: http://killzoneauthors.blogspot.com/2012/06/you-are-your-own-gatekeeper.html#.Ux4jx_SwJ3N" />
+  If you want to edit some code or build it locally you are going to need to check it out from the source.  That source is a URI that can look like <code>git@github.com:tfitch/automation-tools-bootcamp.git</code> or <code>https://github.com/tfitch/automation-tools-bootcamp.git</code><br />
   <br />
-  The gist of Fork + Pull Request is the code repo will have a "Gate Keeper" approving merges.  You can have multiple approvers.  This *should* ensure you've had a code review.  If you blindly accept all Pull Requests then the code review part is out the door.<br />
-  You can receive patches from external entities.  This is how just about every Open Source project on GitHub works.<br />
-  <br />
-  On Gitlab these are called "Merge Requests".  Same stuff, different name.  So let's try to not get hung up on semantics.
+  The git protocol will run over ssh and use a key based authorization when communicating to the server.  The HTTP(S) connection to a Git repo is valid and can pass a username/password for authorization to achieve the same functionality as the git/ssh protocol uses.  When needed, the HTTP connection is a great backup when a firewall is blocking ssh connections.
+  <img src="./images/git-checkout-uri.png" alt="GitHub project URL" />
 </p>
 
-<h3>
-<a name="git-flow" class="anchor" href="#git-flow"><span class="octicon octicon-link"></span></a>Git Flow</h3>
+<h3><a name="new-repo" class="anchor" href="#new-repo"><span class="octicon octicon-link"></span></a>Make a new Git repository</h3>
 
-<p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_new">Git Flow</a> is predicated on the idea that the trunk/master branch is always live.  Any check-in to the master branch is reviewed, tested and ready to go live.<br />  So - where does all the work happen?  In feature branches, which are integrated in to the develop branch.  The release branch is cut from develop, verified and then merged to master for every release.<br />
-  <a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_new"Documented over at nvie.com</a> - as well as <a href="http://nvie.com/posts/a-git-flow-screencast/" target="_new">a screencast</a>.<br />
-  SourceTree has <a href="http://blog.sourcetreeapp.com/2012/08/01/smart-branching-with-sourcetree-and-git-flow/" target="_new">push button Git Flow support</a>.
-  <img src="images/git-flow.png" />
-  </p>
+<p>
+  <ul>
+    <li>If you like the command line. <code>git init</code> <a href="http://git-scm.com/docs/git-init" target="_new">http://git-scm.com/docs/git-init</a></li>
+    <li>If you like a GUI - push the button(s).<br />
+  <img src="./images/git-gui-new-repo.png" alt="SourceTree New Repository button being pushed." />
+    </li>
+  </ul>
+</p>
 
-<h3>
-<a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
+<h3><a name="editing" class="anchor" href="#editing"><span class="octicon octicon-link"></span></a>Edit your files</h3>
+
+<p>
+  Now that you have your repo checked out, feel free to edit your files with your <a href="http://www.sublimetext.com/" target="_new">favorite text editor</a>.  That's it.  No second checkout/making writeable like with Perforce.  Just start working without Git being in your way.<br />
+  <br />
+  You've edited your files so let's look at what has been edited?<br />
+  <code>git status</code> <a href="http://git-scm.com/docs/git-status" target="_new">http://git-scm.com/docs/git-status</a><br />
+  <img src="./images/git-status-cli.png" alt="git status from the command line" /><br />
+  Or you're using a GUI based tool.<br />
+  <img src="./images/git-status-gui.png" alt="git status from SourceTree" /><br />
+</p>
+
+<h3><a name="add-files" class="anchor" href="#add-files"><span class="octicon octicon-link"></span></a>Add files for check in</h3>
+<p>
+  And now we're ready to <code>git add</code> the changes so they can be checked in. <a href="http://git-scm.com/docs/git-add" target="_new">http://git-scm.com/docs/git-add</a><br />
+  * That green dot in the image, that's just because my command prompt (<a href="https://github.com/robbyrussell/oh-my-zsh" target="_new">oh-my-zsh</a> + <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_new">a random theme</a> do that).  Your mileage may vary.*</br>
+  <img src="./images/git-add-cli.png" alt="git add and status from the command line" /><br />
+  This is what the staged files look like in a GUI.<br />
+  <img src="./images/git-add-gui.png" alt="git staged files in SourceTree" />
+</p>
+
+<h3><a name="checkin" class="anchor" href="#checkin"><span class="octicon octicon-link"></span></a>Checking in your edited files</h3>
+<p>
+  All the prep work is done.  You're ready to make your edit real and commit to it.<br />
+  <code>git commit -m "My commit message for my change"</code> <a href="http://git-scm.com/docs/git-commit" target="_new">http://git-scm.com/docs/git-commit></a>
+</p>
+
+<h3><a name="push-it" class="anchor" href="#push-it"><span class="octicon octicon-link"></span></a>Push it real good.</h3>
+<p>
+  So you're done!<br />
+  <img src="./images/lana-nope.gif" alt="Lana Kane saying 'Nope'" /><br />
+  Why not?  Git is a Distributed Version Control System.  Your committed changes aren't also someone else's changes until you <code>git push</code> them back to the origin. <a href="http://git-scm.com/docs/git-push" target="_new">http://git-scm.com/docs/git-push</a>
+</p>
+
+<h3><a name="pull-it" class="anchor" href="#pull-it"><span class="octicon octicon-link"></span></a>Pull it over.</h3>
+<p>
+  You're not coding on an island.  Along with pushing your changes up to the origin, you need to <code>git pull</code> changes from origin that are being added to your project. <a href="http://git-scm.com/docs/git-pull" target="_new">http://git-scm.com/docs/git-pull</a><br />
+  <br />
+  Or you can look at what changes you're missing from origin by running <code>git fetch</code> <a href="http://git-scm.com/docs/git-fetch" target="_new">http://git-scm.com/docs/git-fetch</a><br />
+  <img src="./images/farside-pull.jpg" alt="Far Side - 'School For the Gifted' joke" />
+</p>
+
+<h3><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
 
 <p>We are going to complete the following actions</p>
 <ol>
-  <li>Send a Pull/Merge Request with your name added to the Attendee list of the README for this code depot. Hint: you can do this entirely in the browser</li>
-  <li>Install SourceTree.  Use Git Flow to create a Release of your own repo, or fork this repo and create a Release.</li>
+  <li>Install <a href="http://www.sourcetreeapp.com/" target="_new">SourceTree</a></li>
+  <li>Checkout this repo</li>
+  <li>Add your name to the README and check your change in.</li>
+  <li>Go to the next workout that covers <a href="./git-workflows.html">Git branching and workflows</a></li>
 </ol>
 
         </section>
 
         <aside id="sidebar">
 
-          <p class="repo-owner">Meetings<br />
+          <p class="repo-owner">Topics<br />
             <a href="./github.html">Intro to GitHub</a><br />
             <a href="./vagrant.html">Intro to Vagrant</a><br />
             <a href="./chef.html">Intro to Chef</a><br />
@@ -99,7 +144,7 @@ $ git checkout gh-pages
             <a href="./jenkins.html">Intro to Jenkins</a><br />
           </p>
 
-          <p class="repo-owner">Is maintained by Tyler Fitch (@tfitch).</p>
+          <p class="repo-owner">Maintained by Tyler Fitch (@tfitch).</p>
 
           <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
