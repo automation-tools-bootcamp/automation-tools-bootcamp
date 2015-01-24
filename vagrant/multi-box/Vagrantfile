@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  # reduce memory requirement so we can have more
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "384"]
+  end
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "hashicorp/precise32"
+
+  # the path to the one-time boot/installer script (until it is moved to Chef)
+  config.vm.provision :shell, :path => "../bootstrap.sh"
+
+  # Share an additional folder to the guest VM.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # bringing up the Mongo Replicaset actually has to happen in reverse order with Primary last
+  config.vm.define :web1 do |web1|
+    # To keep the Chef server clients from stepping on each other's toes - unique names for everyone
+    web1.vm.hostname = "bootcamp-vagrant-web1-#{ENV['USER']}";
+
+    # Create a forwarded port mapping which allows access to a specific port within the machine from a port on the host machine.
+    # MongoDB from the VM to the host on the same port
+    web1.vm.network :private_network, ip: "192.168.50.10"
+    web1.vm.network :forwarded_port, guest: 80, host: 8081, auto_correct: true
+  end
+
+  config.vm.define :web2 do |web2|
+    # To keep the Chef server clients from stepping on each other's toes - unique names for everyone
+    web2.vm.hostname = "bootcamp-vagrant-web2-#{ENV['USER']}";
+
+    # Create a forwarded port mapping which allows access to a specific port within the machine from a port on the host machine.
+    # MongoDB from the VM to the host on the same port
+    web2.vm.network :private_network, ip: "192.168.50.20"
+    web2.vm.network :forwarded_port, guest: 80, host: 8082, auto_correct: true
+  end
+
+  config.vm.define :web3 do |web3|
+    # To keep the Chef server clients from stepping on each other's toes - unique names for everyone
+    web3.vm.hostname = "bootcamp-vagrant-web3-#{ENV['USER']}";
+
+    # Create a forwarded port mapping which allows access to a specific port within the machine from a port on the host machine.
+    # MongoDB from the VM to the host on the same port
+    web3.vm.network :private_network, ip: "192.168.50.30"
+    web3.vm.network :forwarded_port, guest: 80, host: 8083, auto_correct: true
+  end
+
+end
