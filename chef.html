@@ -30,9 +30,8 @@
         <section id="main-content">
           <h3><a name="introduction-to-chef" class="anchor" href="#introduction-to-chef"><span class="octicon octicon-link"></span></a>Introduction to Chef</h3>
 
-<p>I have to start with an apology - of all the subjects to cover I think this one is the most impossible to do properly in one hour.  We will be able to cover the "What Chef is" but not as much about "How Chef does it".  That said, with the info here you will be able to create a cookbook here to configure a server.</p>
-
-<p>Bonus apology.  As noted below, Chef moves fast.  And lots of this info is out of date.  Specifically, no mention of <a href="https://github.com/chef/chef-dk" target="_new">Chef DK</a>.</p>
+<img src="./images/chef-logo.png" align="right" />
+<p>Of all the bootcamp subjects to cover I think this one is the most impossible to present properly in one hour.  We will be able to cover the "What Chef is" but not as much about "How Chef does it".  That said, with the info here you will create a simple cookbook to configure a server.</p>
 
 <h3><a name="chef-from-chef" class="anchor" href="#chef-from-chef"><span class="octicon octicon-link"></span></a>Chef is a product from <a href="http://www.chef.io/" target="_new">Chef</a>.</h3>
 
@@ -55,7 +54,7 @@
   <li>Code linting - <a href="http://www.foodcritic.io/" target="_new">Foodcritic</a> and <a href="https://github.com/bbatsov/rubocop" target="_new">Rubocop</a></li>
   <li>Unit Testing - <a href="http://code.sethvargo.com/chefspec/" target="_new">ChefSpec</a></li>
   <li>Integration Testing - <a href="http://kitchen.ci/" target="_new">Test Kitchen</a></li>
-  <li>All these tools are so useful, Chef bundled them together in to <a href="https://github.com/chef/chef-dk" target="_new">the Chef DK.</a></li>
+  <li>All these tools are so useful, Chef bundled them together in to <a href="http://docs.chef.io/devkit/" target="_new">the Chef DK.</a></li>
   <li>Automation of linting, unit testing and interation testing after a code check-in can be done in in Countinuous Integration tools like <a href="./jenkins.html">Jenkins</a>, just like building other software projects</li>
   <li>Successful completion of the above steps would indicate a working cookbook change and your CI server can publish the change to the Chef server for managed machines to pull down the update and apply it.</li>
 </ul>
@@ -80,6 +79,8 @@ A way to group and isolate cookbooks needed for a project or app.  A Chef server
 
 <p>In your .gitingore file add a line with <code>.chef</code></p>
 
+<h3><a name="secret-secrets" class="anchor" href="#secret-secrets"><span class="octicon octicon-link"></span></a>Don't store secrets in plain text either</h3>
+
 <p>Speaking of keeping secrets out of source control - you'd never put your SSL cert in source control.<br />
 <br/>
 How to handle secret server config values you need to get on to the server but cannot put in to source control?<br />
@@ -97,7 +98,7 @@ Need Java?  <a href="https://supermarket.chef.io/cookbooks/java" target="_new">U
 Need Tomcat? <a href="https://supermarket.chef.io/cookbooks/tomcat" target="_new">Use the community cookbook!</a><br />
 Need MongoDB? <a href="https://supermarket.chef.io/cookbooks/mongodb" target="_new">Use the community cookbook!</a><br />
 <br />
-For a generic base install of MongoDB it's two lines.<br>
+For a generic base install of MongoDB from the community cookbook?  It's two lines.<br>
 <pre><code># in metadata.rb file
 depends 'mongodb'
 
@@ -112,18 +113,51 @@ DONE AND DONE.  MongoDB is installed.</p>
 BUT - sometimes (read: often) the community cookbook just isn't right.  Go ahead a roll your own.  Spin up a base Vagrant VM.  Run some commands to install your software just the way you need.  Then copy those commands in to a cookbook.  Copy any config files to your cookbook too.  Now you can reproduce your app install as many times as needed.  OR - contribute a change back to the community cookbook via a GitHub Pull Request.  <a href="http://tfitch.github.io/automation-tools-bootcamp/git-workflows.html#fork-pull-request" target="_new">We know how to do that.</a>
 </p>
 
-<h3><a name="to-follow" class="anchor" href="#to-follow"><span class="octicon octicon-link"></span></a>Chefs to follow</h3>
+<h3><a name="create-cookbook" class="anchor" href="#create-cookbook"><span class="octicon octicon-link"></span></a>Create our first cookbook</h3>
+<p><a href="http://docs.chef.io/devkit/getting_started.html#your-first-cookbook" target="_new">Generating your first cookbook</a> starts with the <code>chef generate app automation-tools</code> command.<br />
+<br />
+This will give you a directory structure with all files necessary to stubbed out.  Let's just dig in to the <code>recipes/default.rb</code> file and use it to install Apache2.
+<pre><code># in recipes/default.rb
+package 'httpd' do
+  action :install
+end
+</code></pre>
+You've done it.  In a very Ubuntu specific way, but Apache 2 has been installed.  Congrats.
+</p>
+
+<h3><a name="test-kitchen" class="anchor" href="#test-kitchen"><span class="octicon octicon-link"></span></a>Test Kitchen</h3>
+<p>
+Very good.  Now to test it.  You'll need the Chef Server, then upload the cookbook to the server, bootstrap a VM with Vagrant, register the VM with the Chef Server, and then finally converge the node to see if your cookbook works.  Sounds like a pain in the butt and it was.  With some Vagrant plugins the process was bearable, but still clunky.<br />
+But <a href="https://github.com/fnichol" target="_new">Flether Nichol</a> decided we should have a better experience and instead created <a href="http://kitchen.ci/" target="_new">Test Kitchen</a>.  Similar to the joy that Mitchell Hashimoto delivered by putting VM settings in a Vagrantfile, Fletcher took Configuration Management testing to the next step and now we create .kitchen.yml files.<br />
+We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef server with Chef Zero (or use a real Chef server if that's your thing), spin up your desired machine with your <a href="https://rubygems.org/search?utf8=%E2%9C%93&amp;query=kitchen-" target="_new">desired driver</a> (Vagrant, Docker, AWS, OpenStack, etc), do a Chef client run of your cookbook and then test the changes (<code>kitchen test</code>) were applied or allow you to log in to the VM and check things out manually.  All of which is driven by the data in your .kitchen.yml file.
+</p>
+
+<h3><a name="to-follow" class="anchor" href="#to-follow"><span class="octicon octicon-link"></span></a>Chefs to follow on Twitter</h3>
 <ul>
+  <li><a href="https://twitter.com/adamhjk" target="_new">Adam Jacob</a></li>
   <li><a href="https://twitter.com/sigje" target="_new">Jennifer Davis</a></li>
-  <li><a href="https://twitter.com/fnichol" target="_new">Flether Nichol</a></li>
+  <li><a href="https://twitter.com/fnichol" target="_new">Fletcher Nichol</a></li>
   <li><a href="https://twitter.com/julian_dunn" target="_new">Julian Dunn</a></li>
+  <li><a href="https://twitter.com/chef" target="_new">Chef</a></li>
 </ul>
 <h3><a name="podcasts" class="anchor" href="#podcasts"><span class="octicon octicon-link"></span></a>Podcasts to listen to</h3>  
-<ul>
-  <li><a href="http://foodfightshow.org/" target="_new">Food Fight Show</a></li>
-  <li><a href="http://theshipshow.com" target="_new">The Ship Show</a></li>
-  <li><a href="http://www.arresteddevops.com" target="_new">Arrested DevOps</a></li>
-</ul>
+<p>
+  <a href="http://foodfightshow.org/" target="_new"><img src="./images/food-fight.jpeg" width="170" /> Food Fight Show</a>&nbsp;&nbsp;&nbsp;
+  <a href="http://theshipshow.com" target="_new"><img src="./images/tss-logo.jpg" width="170" /> The Ship Show</a><br />
+  <a href="http://www.arresteddevops.com" target="_new"><img src="./images/adoicon.png" width="170" /> Arrested DevOps</a>&nbsp;&nbsp;
+  <a href="http://www.opsallthethings.com/" target="_new"><img src="./images/ops-all-the-things.jpeg" width="170" /> Ops All The Things!</a><br />
+</p>
+
+<h3><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/chef" target="_new">example cookbook</a> (once available) which you checked out during the Git session.</li>
+  <li>Edit the <code>recipes/default.rb</code> file to install Apache 2 using the <code>httpd</code> package.</li>
+  <li>Converge the Test Kitchen node <code>kitchen converge</code></li>
+  <li>Browse to the VM in your browser. <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
+  <li>Connect via SSH (<code>kitchen ???</code>) and then stop the Apache server from running <code>sudo service apache2 stop</code> and reload the webpage.</li>
+</ol>
 
 
 
