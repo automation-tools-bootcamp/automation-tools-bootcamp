@@ -28,75 +28,74 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>
-<a name="introduction-to-chef" class="anchor" href="#introduction-to-chef"><span class="octicon octicon-link"></span></a>Introduction to Chef</h3>
+          <h3><a name="introduction-to-chef" class="anchor" href="#introduction-to-chef"><span class="octicon octicon-link"></span></a>Introduction to Chef</h3>
 
-<p>I have to start with an apology - of all the subjects to cover I think this one is the most impossible to do properly in one hour.  We will be able to cover the "What Chef is" but not as much about "How Chef does it".  If you're interested in session(s) about "How Chef does work" then message me (@tfitch) and based on feedback I'll either help answer your questions or find more info about that area of Chef.</p>
+<p>I have to start with an apology - of all the subjects to cover I think this one is the most impossible to do properly in one hour.  We will be able to cover the "What Chef is" but not as much about "How Chef does it".  That said, with the info here you will be able to create a cookbook here to configure a server.</p>
 
-<p>Bonus apology.  As noted below, Chef moves fast.  And lots of this info is out of date.  Specifically, no mention of <a href="https://github.com/opscode/chef-dk" target="_new">Chef DK</a>.</p>
+<p>Bonus apology.  As noted below, Chef moves fast.  And lots of this info is out of date.  Specifically, no mention of <a href="https://github.com/chef/chef-dk" target="_new">Chef DK</a>.</p>
 
-<h3><a name="chef-from-chef" class="anchor" href="#chef-from-chef"><span class="octicon octicon-link"></span></a>Chef is a product from <a href="http://www.getchef.com/" target="_new">OpsCode now Chef</a>.</h3>
+<h3><a name="chef-from-chef" class="anchor" href="#chef-from-chef"><span class="octicon octicon-link"></span></a>Chef is a product from <a href="http://www.chef.io/" target="_new">Chef</a>.</h3>
 
 <ul>
   <li>Chef will install and configure software for your server (or VM of a server) - or even your laptop if you wanted.</li>
   <li>Chef is a DSL based on Ruby. Knowing Ruby is helpful but not required.</li>
-  <li>Almost everything from <a href="https://github.com/opscode" target="_new">Chef is open source</a>.  Especially the <a href="https://github.com/opscode-cookbooks" target="_new">community cookbooks Chef maintains</a>.</li>
+  <li>Almost everything from <a href="https://github.com/chef" target="_new">Chef is open source</a>.  Especially the <a href="https://github.com/chef-cookbooks" target="_new">community cookbooks Chef maintains</a>.</li>
   <li>You write recipes which are stored in cookbooks.  A knife does most of the work.  LOTS of cooking related names.</li>
-  <li>It is generally assumed you are using Git with Chef.  Not a requirement, but some commands will actually try and execute Git commands.</li>
-  <li>Chef and its ecosystem of tools are advancing at a pace I've never seen in a tool.  It is *hard* to keep to up date.</li>
-  <li>Wanna learn how to do something in Chef.  <a href="http://community.opscode.com/" target="_new">Community cookbooks</a> have examples of just about everything. Don't reinvent the wheel.</li>
+  <li>It is generally assumed you are using Git with Chef.  Not a requirement, but some tools in the Chef ecosystem will actually try and execute Git commands.</li>
+  <li>Chef and its ecosystem of tools are advancing at a pace I've never seen in a tool.  It is *hard* to keep to up date (and it's my part of my job).</li>
+  <li>Wanna learn how to do something in a Chef cookbook.  Cookbooks in the <a href="https://supermarket.chef.io" target="_new">Chef Supermarket</a> have examples of just about everything. Don't reinvent the wheel.</li>
 </ul>
 
 <h3><a name="best-practices" class="anchor" href="#best-practices"><span class="octicon octicon-link"></span></a>All the best practices of software development are available.</h3>
 
-<p>The Ruby community are excellent at the practice of TDD.  This has, thankfully, carried over to the Chef community.  The tools exist, they increase the learning curve, but prevent bad check-ins when used properly.</p>
+<p>The Ruby community are excellent at the practice of TDD (Test Driven Development).  This has, thankfully, carried over to the Chef community.  The tools exist, they increase the learning curve, but prevent bad check-ins when used properly.</p>
 
 <ul>
   <li>Dependency management - <a href="http://berkshelf.com/" target="_new">Berkshelf</a></li>
-  <li>Code linting - <a href="http://www.foodcritic.io/" target="_new">Foodcritic</a></li>
+  <li>Code linting - <a href="http://www.foodcritic.io/" target="_new">Foodcritic</a> and <a href="https://github.com/bbatsov/rubocop" target="_new">Rubocop</a></li>
   <li>Unit Testing - <a href="http://code.sethvargo.com/chefspec/" target="_new">ChefSpec</a></li>
   <li>Integration Testing - <a href="http://kitchen.ci/" target="_new">Test Kitchen</a></li>
-  <li>Automation of linting, unit testing and interation testing after a code check-in can be done in Jenkins, just like building other software projects</li>
-  <li>Successful completion of the above steps would indicate a working cookbook and Jenkins can publish to the Chef server for other servers to being updating from.</li>
+  <li>All these tools are so useful, Chef bundled them together in to <a href="https://github.com/chef/chef-dk" target="_new">the Chef DK.</a></li>
+  <li>Automation of linting, unit testing and interation testing after a code check-in can be done in in Countinuous Integration tools like <a href="./jenkins.html">Jenkins</a>, just like building other software projects</li>
+  <li>Successful completion of the above steps would indicate a working cookbook change and your CI server can publish the change to the Chef server for managed machines to pull down the update and apply it.</li>
 </ul>
 
 <h3><a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started.</h3>
 
-<p><a href="https://learnchef.opscode.com/" target="_new">LearnChef</a> - a perfectly crafted <a href="https://learnchef.opscode.com/quickstart/workstation-setup/" target="_new">Chef QuickStart Guide</a> as well as numerous other webinars and tutorials.  Follow the steps as described - you'll accomplish more in an hour than you're expecting!</p>
+<p><a href="http://learnchef.com" target="_new">LearnChef</a> has a well crafted tutorial based on your prefered client OS.  As well as numerous other webinars and tutorials.  Follow the steps as described - you'll accomplish more in an hour than you're expecting!</p>
 
-<p>Chef-solo vs. Chef Server/Client (REST based API actually).<br />
+<p>Chef Server/Client (REST based API actually).<br />
 <br />
-Chef-solo is a way to independently run a cookbook w/o using a Chef server.  People will often do this with local cookbook development and Vagrant.  Removing the server calls makes your testing self contained.  *** This can be better done now with Chef Zero ***<br />
-<br />
-Chef Server actually reminds me of old school web application development. You edit the cookbook, upload to the server and then run a Vagrant VM to pull down the change an apply, Chef calls this converging, the cookbook on the server to validate it works.  Edit, upload, provision/converge, verify results.</p>
+Chef Server actually reminds me of old school web application development. You edit the cookbook, upload to the server and then run a Vagrant VM to pull down the change an apply, Chef calls this converging the cookbook on the client node to validate it works.  Edit, upload, provision/converge, verify results.</p>
 
 <h3><a name="key-files" class="anchor" href="#key-files"><span class="octicon octicon-link"></span></a>Pay attention to your Chef server key files</h3>
 
-<p>They are not to be shared and the Organization ones you don't want to regenerate except in a disaster recovery situation.  It will invalidate currently configured machines, maybe already live machines, and prevent them from further Chef updates.<br />
+<p>They are not to be shared and the Organization ones you don't want to regenerate except in a disaster recovery situation.<br />
 <br />
-<a href="http://docs.opscode.com/server_orgs.html" target="_new">What is a Chef server Organization?</a><br />
+<a href="https://docs.chef.io/server_orgs.html" target="_new">What is a Chef server Organization?</a><br />
 A way to group and isolate cookbooks needed for a project or app.  A Chef server Organization has its own security key files and cookbooks.  The combination of the Organization key file and your user key files allows authorizes your interaction with the Chef server's APIs (upload cookbook, register client machine, etc).
 </p>
 
 <h2>NEVER PUT A CHEF KEY IN TO SOURCE CONTROL!</h1>
 
-<p>In your gitingore file add a line with <code>.chef</code></p>
+<p>In your .gitingore file add a line with <code>.chef</code></p>
 
-<p>Speaking of keeping things out of source control - you'd never put your SSL cert in source control.<br />
+<p>Speaking of keeping secrets out of source control - you'd never put your SSL cert in source control.<br />
 <br/>
 How to handle secret server config values you need to get on to the server but cannot put in to source control?<br />
-<a href="http://docs.opscode.com/essentials_data_bags.html" target="_new">Data bags</a> - think of them as name/value pairs you upload to the server and they're available to the Chef clients when needed w/o being stored in the cookbook that everyone can see.  BUT!!! Data bags are stored in clear text and viewable on the Chef server web interface.<br/>
-<a href="http://docs.opscode.com/chef/essentials_data_bags.html#encrypt-a-data-bag-item" target="_new">Encrypted data bags</a> - just like regular data bags, but require an extra file that is the key to lock and unlock the data back contents.  Like above, the SSL cert needs to be in an encrypted data bag.<br />
+<a href="http://docs.chef.io/data_bags.html" target="_new">Data bags</a> - think of them as name/value pairs you upload to the server and they're available to the Chef clients when needed w/o being stored in the cookbook that everyone can see.  BUT!!! Data bags are stored in clear text and viewable on the Chef server web interface.<br/>
+<a href="http://docs.chef.io/data_bags.html#encrypt-a-data-bag-item" target="_new">Encrypted data bags</a> - just like regular data bags, but require an extra file that is the key to lock and unlock the data back contents.  Like mentioned above, the SSL cert needs to be in an encrypted data bag.<br />
 <br />
-**** All check out <a href="http://jtimberman.housepub.org/blog/2013/09/10/managing-secrets-with-chef-vault/" target="_new">Chef Vault</a> from Nordstrom for cookbook secret management ****</p>
+Encrypted data bags are not the only method to store secrets for Chef cookbooks.  Please read <a href="https://coderanger.net/chef-secrets/" target="_new">Secrets Management and Chef</a> by Noah Kantrowitz.  A top notch summary of available options for managing secrets in Chef cookbooks and when the strengths of one is better than the other.
+</p>
 
 <h3><a name="the-wheel" class="anchor" href="#the-wheel"><span class="octicon octicon-link"></span></a>Do not reinvent the wheel</h3>
 
-<p>Now that we've covered all that - here's the secret to Chef.  <a href="http://community.opscode.com/" target="_new">It's all been done before!!!</a>  In the same way that Java has Maven or Node has npm for getting libraries people have already created - Chef is based on community cookbooks.  They're open source - use them *and* learn from them.<br />
+<p>Now that we've covered all that - here's the secret to Chef.  <a href="https://supermarket.chef.io" target="_new">It's all been done before!!!</a>  In the same way that Java has Maven or Node has npm for getting libraries people have already created - Chef is based on community cookbooks.  They're open source - use them *and* learn from them.<br />
 <br />
-Need Java?  <a href="http://community.opscode.com/cookbooks/java" target="_new">Use the community cookbook!</a><br />
-Need Tomcat? <a href="http://community.opscode.com/cookbooks/tomcat" target="_new">Use the community cookbook!</a><br />
-Need MongoDB? <a href="http://community.opscode.com/cookbooks/mongodb" target="_new">Use the community cookbook!</a><br />
+Need Java?  <a href="https://supermarket.chef.io/cookbooks/java" target="_new">Use the community cookbook!</a><br />
+Need Tomcat? <a href="https://supermarket.chef.io/cookbooks/tomcat" target="_new">Use the community cookbook!</a><br />
+Need MongoDB? <a href="https://supermarket.chef.io/cookbooks/mongodb" target="_new">Use the community cookbook!</a><br />
 <br />
 For a generic base install of MongoDB it's two lines.<br>
 <pre><code># in metadata.rb file
@@ -110,23 +109,22 @@ DONE AND DONE.  MongoDB is installed.</p>
 <h3><a name="have-to" class="anchor" href="#have-to"><span class="octicon octicon-link"></span></a>Do not reinvent the wheel (unless you have to)</h3>
 <p>The community cookbooks are robust and often, but not always, support a wide range of configuration options (like host name, app install directory).<br />
 <br />
-BUT - sometimes the community cookbook just isn't right.  Go ahead a roll your own.  Spin up a base Vagrant VM.  Run some commands to install your software just the way you need.  Then copy those commands in to a cookbook.  Copy any config files to your cookbook too.  Now you can reproduce your app install as many times as needed.  OR - contribute a change back to the community cookbook via a GitHub Pull Request.  <a href="http://tfitch.github.io/automation-tools-bootcamp/github.html#fork-pull-request" target="_new">We know how to do that.</a>
+BUT - sometimes (read: often) the community cookbook just isn't right.  Go ahead a roll your own.  Spin up a base Vagrant VM.  Run some commands to install your software just the way you need.  Then copy those commands in to a cookbook.  Copy any config files to your cookbook too.  Now you can reproduce your app install as many times as needed.  OR - contribute a change back to the community cookbook via a GitHub Pull Request.  <a href="http://tfitch.github.io/automation-tools-bootcamp/git-workflows.html#fork-pull-request" target="_new">We know how to do that.</a>
 </p>
 
 <h3><a name="to-follow" class="anchor" href="#to-follow"><span class="octicon octicon-link"></span></a>Chefs to follow</h3>
 <ul>
-  <li><a href="https://twitter.com/sethvargo" target="_new">Seth Vargo</a></li>
+  <li><a href="https://twitter.com/sigje" target="_new">Jennifer Davis</a></li>
   <li><a href="https://twitter.com/fnichol" target="_new">Flether Nichol</a></li>
-  <li><a href="https://twitter.com/nathenharvey" target="_new">Nathen Harvey</a></li>
+  <li><a href="https://twitter.com/julian_dunn" target="_new">Julian Dunn</a></li>
+</ul>
+<h3><a name="podcasts" class="anchor" href="#podcasts"><span class="octicon octicon-link"></span></a>Podcasts to listen to</h3>  
+<ul>
   <li><a href="http://foodfightshow.org/" target="_new">Food Fight Show</a></li>
+  <li><a href="http://theshipshow.com" target="_new">The Ship Show</a></li>
+  <li><a href="http://www.arresteddevops.com" target="_new">Arrested DevOps</a></li>
 </ul>
 
-<!--
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
--->
 
 
         </section>
