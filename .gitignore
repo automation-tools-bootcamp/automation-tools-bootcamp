@@ -1,3 +1,4 @@
 .vagrant
 .c9
 .kitchen
+Berksfile.lock
