@@ -11,6 +11,3 @@ execute 'apt-get update' do
 end
 
 # your installation of Apache2 goes here
-package 'apache2' do
-	action :install
-end
