@@ -118,7 +118,7 @@ BUT - sometimes (read: often) the community cookbook just isn't right.  Go ahead
 <br />
 This will give you a directory structure with all files necessary to stubbed out.  Let's just dig in to the <code>recipes/default.rb</code> file and use it to install Apache2.
 <pre><code># in recipes/default.rb
-package 'httpd' do
+package 'apache2' do
   action :install
 end
 </code></pre>
@@ -152,7 +152,7 @@ We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef se
 
 <p>We are going to complete the following actions</p>
 <ol>
-  <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/chef/automation-tools" target="_new">example cookbook</a> (once available) which you checked out during the Git session.</li>
+  <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/chef/automation-tools" target="_new">example cookbook</a> which you checked out during the Git session.</li>
   <li>Edit the <code>recipes/default.rb</code> file to install Apache 2 using the <code>apache2</code> <a href="https://docs.chef.io/resource_package.html" target="_new">package</a>.</li>
   <li>Converge the Test Kitchen node <code>kitchen converge</code></li>
   <li>Browse to the VM in your browser. <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
