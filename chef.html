@@ -63,36 +63,14 @@
 
 <p><a href="http://learnchef.com" target="_new">LearnChef</a> has a well crafted tutorial based on your prefered client OS.  As well as numerous other webinars and tutorials.  Follow the steps as described - you'll accomplish more in an hour than you're expecting!</p>
 
-<p>Chef Server/Client (REST based API actually).<br />
+<h3><a name="server-client" class="anchor" href="#server-client"><span class="octicon octicon-link"></span></a>Chef Server/Client</h3>
+<p>The Chef Client's interactions with the Chef Server are a REST based API actually.<br />
 <br />
-Chef Server actually reminds me of old school web application development. You edit the cookbook, upload to the server and then run a Vagrant VM to pull down the change an apply, Chef calls this converging the cookbook on the client node to validate it works.  Edit, upload, provision/converge, verify results.</p>
-
-<h3><a name="key-files" class="anchor" href="#key-files"><span class="octicon octicon-link"></span></a>Pay attention to your Chef server key files</h3>
-
-<p>They are not to be shared and the Organization ones you don't want to regenerate except in a disaster recovery situation.<br />
-<br />
-<a href="https://docs.chef.io/server_orgs.html" target="_new">What is a Chef server Organization?</a><br />
-A way to group and isolate cookbooks needed for a project or app.  A Chef server Organization has its own security key files and cookbooks.  The combination of the Organization key file and your user key files allows authorizes your interaction with the Chef server's APIs (upload cookbook, register client machine, etc).
-</p>
-
-<h2>NEVER PUT A CHEF KEY IN TO SOURCE CONTROL!</h1>
-
-<p>In your .gitingore file add a line with <code>.chef</code></p>
-
-<h3><a name="secret-secrets" class="anchor" href="#secret-secrets"><span class="octicon octicon-link"></span></a>Don't store secrets in plain text either</h3>
-
-<p>Speaking of keeping secrets out of source control - you'd never put your SSL cert in source control.<br />
-<br/>
-How to handle secret server config values you need to get on to the server but cannot put in to source control?<br />
-<a href="http://docs.chef.io/data_bags.html" target="_new">Data bags</a> - think of them as name/value pairs you upload to the server and they're available to the Chef clients when needed w/o being stored in the cookbook that everyone can see.  BUT!!! Data bags are stored in clear text and viewable on the Chef server web interface.<br/>
-<a href="http://docs.chef.io/data_bags.html#encrypt-a-data-bag-item" target="_new">Encrypted data bags</a> - just like regular data bags, but require an extra file that is the key to lock and unlock the data back contents.  Like mentioned above, the SSL cert needs to be in an encrypted data bag.<br />
-<br />
-Encrypted data bags are not the only method to store secrets for Chef cookbooks.  Please read <a href="https://coderanger.net/chef-secrets/" target="_new">Secrets Management and Chef</a> by Noah Kantrowitz.  A top notch summary of available options for managing secrets in Chef cookbooks and when the strengths of one is better than the other.
-</p>
+Developing Chef cookbooks actually reminds me of old school web application development. You edit the cookbook, upload to the server and then run a Vagrant VM to pull down the change an apply, Chef calls this converging the cookbook on the client node to validate it works.  Edit, upload, provision/converge, verify results.</p>
 
 <h3><a name="the-wheel" class="anchor" href="#the-wheel"><span class="octicon octicon-link"></span></a>Do not reinvent the wheel</h3>
 
-<p>Now that we've covered all that - here's the secret to Chef.  <a href="https://supermarket.chef.io" target="_new">It's all been done before!!!</a>  In the same way that Java has Maven or Node has npm for getting libraries people have already created - Chef is based on community cookbooks.  They're open source - use them *and* learn from them.<br />
+<p>Now that we've covered all that - here's the secret to Chef.  <a href="https://supermarket.chef.io" target="_new">It's all been done before!!!</a>  In the same way that Java has Maven, Ruby has games or Node has npm for getting libraries people have already created - Chef has community cookbooks.  They're open source - use them *and* learn from them.<br />
 <br />
 Need Java?  <a href="https://supermarket.chef.io/cookbooks/java" target="_new">Use the community cookbook!</a><br />
 Need Tomcat? <a href="https://supermarket.chef.io/cookbooks/tomcat" target="_new">Use the community cookbook!</a><br />
@@ -122,7 +100,7 @@ package 'apache2' do
   action :install
 end
 </code></pre>
-You've done it.  In a very Ubuntu specific way, but Apache 2 has been installed.  Congrats.
+You've done it.  Apache 2 has been installed.  Congrats.
 </p>
 
 <h3><a name="test-kitchen" class="anchor" href="#test-kitchen"><span class="octicon octicon-link"></span></a>Test Kitchen</h3>
@@ -154,9 +132,10 @@ We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef se
 <ol>
   <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/chef/automation-tools" target="_new">example cookbook</a> which you checked out during the Git session.</li>
   <li>Edit the <code>recipes/default.rb</code> file to install Apache 2 using the <code>apache2</code> <a href="https://docs.chef.io/resource_package.html" target="_new">package</a>.</li>
-  <li>Converge the Test Kitchen node <code>kitchen converge</code></li>
+  <li>Converge the node with Test Kitchen <code>kitchen converge</code></li>
   <li>Browse to the VM in your browser. <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
   <li>Connect to the VM via SSH (<code><a href="http://kitchen.ci/docs/getting-started/getting-help" target="_new">kitchen ???</a></code>) and then stop the Apache server from running <code>sudo service apache2 stop</code> and reload the webpage.</li>
+  <li>Feel free to move on to more Chef topics with <a href="./chef-in-practice">Chef in Practice</a></li>
 </ol>
 
 

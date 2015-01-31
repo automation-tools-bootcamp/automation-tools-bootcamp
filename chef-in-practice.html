@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Chef in Practice</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Developer Automation Tools Bootcamp</h1>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3><a name="chef-in-practice" class="anchor" href="#chef-in-practice"><span class="octicon octicon-link"></span></a>Chef in Practice</h3>
+
+<img src="./images/oc-whippingup-sticker.png" width="200" align="right" />
+<p> The <a href="./chef.html">Introduction to Chef</a> showed information about <a href="http://chef.io" target="_new">Chef</a> and creating a first cookbook.<br />
+  Here we are going to look at a few things to think about while doing your Chef development.</p>
+
+<h3><a name="advanced-practices" class="anchor" href="#advanced-practices"><span class="octicon octicon-link"></span></a>Advanced Practices with Chef</h3>
+
+<p>After creating a few cookbooks you'll find you want increased functionality (Handlers) or more robust resources.</p>
+
+<ul>
+  <li><a href="https://docs.chef.io/lwrp.html" target="_new">LWRPs</a></li>
+  <li>A great <a href="http://dougireton.com/blog/categories/lwrp/" target="_new">3-part tutorial on LWRPs</a> from Doug Ireton.</li>
+  <li><a href="https://docs.chef.io/handlers.html" target="_new">Handlers</a></li>
+</ul>
+
+<h3><a name="key-files" class="anchor" href="#key-files"><span class="octicon octicon-link"></span></a>Pay attention to your Chef server key files</h3>
+
+<p>They are not to be shared and the Organization ones you don't want to regenerate except in a disaster recovery situation.<br />
+<br />
+Ideally, the only "user" with write access to your Organization is going to be your Continuous Integration (CI) server.  Upon testing and validation the change to a cookbook, the CI server will do the the <code>knife cookbook upload xyz</code> command for you.<br />
+<br />
+<a href="https://docs.chef.io/server_orgs.html" target="_new">What is a Chef server Organization?</a><br />
+A way to group and isolate cookbooks needed for a project or app.  A Chef server Organization has its own security key files and cookbooks.  The combination of the Organization key file and your user key files allows authorizes your interaction with the Chef server's APIs (upload cookbook, register client machine, etc).
+</p>
+
+<h2>NEVER PUT A CHEF KEY IN TO SOURCE CONTROL!</h1>
+
+<p>In your .gitingore file add a line with <code>.chef</code></p>
+
+<h3><a name="secret-secrets" class="anchor" href="#secret-secrets"><span class="octicon octicon-link"></span></a>Don't store secrets in plain text either</h3>
+
+<p>Speaking of keeping secrets out of source control - you'd never put your SSL cert in source control.<br />
+<br/>
+How to handle secret server config values you need to get on to the server but cannot put in to source control?<br />
+<a href="http://docs.chef.io/data_bags.html" target="_new">Data bags</a> - think of them as name/value pairs you upload to the server and they're available to the Chef clients when needed w/o being stored in the cookbook that everyone can see.  BUT!!! Data bags are stored in clear text and viewable on the Chef server web interface.<br/>
+<a href="http://docs.chef.io/data_bags.html#encrypt-a-data-bag-item" target="_new">Encrypted data bags</a> - just like regular data bags, but require an extra file that is the key to lock and unlock the data back contents.  Like mentioned above, the SSL cert needs to be in an encrypted data bag.<br />
+<br />
+Encrypted data bags are not the only method to store secrets for Chef cookbooks.  Please read <a href="https://coderanger.net/chef-secrets/" target="_new">Secrets Management and Chef</a> by Noah Kantrowitz.  A top notch summary of available options for managing secrets in Chef cookbooks and when the strengths of one is better than the other.
+</p>
+
+<h3><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
+
+<p>We are going to complete the following actions</p>
+<ol>
+  <li>Create a data bag.</li>
+  <li>Use data bag value in cookbook</li>
+  <li>Converge the node with Test Kitchen <code>kitchen converge</code></li>
+</ol>
+
+
+
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./git.html">Intro to Git</a><br />
+            <a href="./git-workflows.html">Intro to Git Workflows</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  
+  </body>
+</html>
