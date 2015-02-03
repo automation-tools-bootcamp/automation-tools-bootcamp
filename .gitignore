@@ -2,3 +2,5 @@
 .c9
 .kitchen
 Berksfile.lock
+.iso
+packer-template
