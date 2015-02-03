@@ -84,11 +84,12 @@ So the top list X the bottom list = a lot of possible combinations.  Pow. er. fu
 
 <p>We are going to complete the following actions</p>
 <ol>
-  <li>***NOT IMPLEMENTED YET***</li>
-  <li>Go in to the packer directory of this git repo and <code>vagrant up</code> our testing VM.</li>
-  <li>Packer will install using a <a href="./chef.html">Chef cookbook</a>.</li>
-  <li>The example template creates an Ubuntu 12.04 box.  Update template to also create a 14.04 box.</li>
-  <li>Destroy the VM and get all your disk space back.</li>
+  <li><a href="https://www.packer.io/intro/getting-started/setup.html" target="_new">Install Packer</a> on *your* machine</li>
+  <li>Go in to the packer directory of this git repo and <code>packer validate amazon-example.json</code> .</li>
+  <li>Create a <a href="http://aws.amazon.com/free/faqs/#What_is_the_AWS_Free_Usage_Tier?" target="_new">Free AWS account</a>.</li>
+  <li>Set two environment variables AWS_ACCESS_KEY and AWS_SECRET_KEY from your AWS account.</li>
+  <li>Build your version of the AMI <code>packer build amazon-example.json</code></li>
+  <li>Delete the AMI from your AWS Console.</li>
 </ol>
         </section>
 
