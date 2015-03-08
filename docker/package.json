@@ -1,0 +1,17 @@
+{
+  "name": "AutomationToolsDockerNodeJS",
+  "version": "0.0.1",
+  "description": "Example app build using Node.js with Express",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "comment": "app.js pretty much copied from http://expressjs.com/starter/hello-world.html",
+  "dependencies": {
+    "express": "4.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tfitch/automation-tools-bootcamp"
+  }
+}
