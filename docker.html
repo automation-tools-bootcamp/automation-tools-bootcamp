@@ -112,13 +112,21 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
 
 <p>We are going to complete the following actions</p>
 <ol>
-  <li><a href="https://www.packer.io/intro/getting-started/setup.html" target="_new">Install Docker</a> on your machine</li>
+  <li><a href="https://www.packer.io/intro/getting-started/setup.html" target="_new">Install Docker</a> on your machine or use the provided <code>Vagrantfile</code> in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/docker" target="_new">code repo</a>.</li>
   <li>Create a <a href="https://hub.docker.com/account/signup/" target="_new">Docker Hub account</a>.</li>
   <li>The Automation Tools git repo has a <code>docker</code> directory with a Dockerfile and small Node.js app.</li>
-  <li>Make yourself the maintiner of the Dockerfile</li>
+  <li>Make yourself the <code>MAINTAINER</code> of the Dockerfile</li>
+  <li>Use <code>RUN</code> to make a directory for your application in the container</li>
+  <li><code>WORKDIR</code> to where you put the package.json file</li>
+  <li><code>ADD</code> or <code>COPY</code> the <code>package.json</code> file to the container</li>
+  <li><code>RUN</code> the command <code>npm install</code></li>
   <li><code>ADD</code> or <code>COPY</code> the <code>app.js</code> file to the container</li>
-  <li><code>RUN</code> or <code>ENTRYPOINT</code> the app with <code>node app.js</code></li>
-  <li>Finally, <code>EXPOSE</code> port 4000 to view the sample app</li>
+  <li><code>CMD</code> or <code>ENTRYPOINT</code> the app with <code>npm start</code></li>
+  <li>You'll want to <code>EXPOSE</code> port 3000 to view the sample app</li>
+  <li>Make a <code>docker build</code> of the new container.  Tag it <code>-t &lt;userid&gt;/automation-tools-nodejs</code></li>
+  <li>Now it's time to <code>docker run</code> that new container.  <code>sudo docker run -it --rm -p=3000:3000 --name my-running-app &lt;userid&gt;/automation-tools-nodejs</code></li>
+  <li><a href="http://localhost:3000" target="_new">View the app in your browser</a>.</li>
+  <li>Use <code>docker push &lt;userid&gt;/automation-tools-nodejs</code> to upload you image to the Docker Hub</li>
 </ol>
         </section>
 
