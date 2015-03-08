@@ -1,3 +1,4 @@
 .vagrant
 .kitchen
 .c9
+node_modules/
