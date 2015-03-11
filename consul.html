@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Developer Automation Tools Bootcamp - Intro to Packer</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="./index.html"><h1>Developer Automation Tools Bootcamp</h1></a>
+        <h2>Learning about development tools and automation</h2>
+        <a href="https://github.com/tfitch/automation-tools-bootcamp" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="introduction-to-consul" class="anchor" href="#introduction-to-consul"><span class="octicon octicon-link"></span></a>Introduction to Consul</h3>
+
+<p><a href="http://consul.io" target="_new"><img src="images/consul-mini-logo.png" /></a><br />
+  The team from <a href="http://hashicorp.com" target="_new">Hashicorp</a> <a href="./vagrant.html">strikes</a> <a href="./packer.html">again</a>.<br />
+  At its core Consul tackles one of the hardest problems facing IT departments today, Service Discovery.  But Consul is also great for Health Checks, Key/Value store and is Multi Datacenter aware.<br />
+<br />
+<a href="https://www.consul.io/intro/index.html" target="_new">Official Intro to Consul</a>
+</p>
+
+<h3><a name="http-api" class="anchor" href="#http-api"><span class="octicon octicon-link"></span></a>HTTP API for Consul</h3>
+<p>
+Consul's main interface to its functionality is via a RESTful <a href="https://consul.io/docs/agent/http.html" target="_new">HTTP API</a>.<br />
+<br />
+Using the HTTP API for Consul you can
+<ul>
+  <li>Serve up custom values for you over HTTP using their <a href="https://consul.io/docs/agent/http/kv.html" target="_new">kv (Key/Value) store</a>.</li>
+  <li>Register and deregister nodes, services and checks with the <a href="https://consul.io/docs/agent/http/catalog.html" target="_new">Catalog Endpoint</a></li>
+  <li><a href="https://consul.io/docs/agent/http/health.html" target="_new">Health Check</a> a node or service</li>
+  <li>View the <a href="https://consul.io/docs/agent/http/status.html" target="_new">Status</a> of the Consul cluster.</a></li>
+  <li>And more</li>
+</ul>
+Why expose all this info via APIs?  Because then external tools like <a href="./jenkins.html">Jenkins</a> can start interacting with Consul without needing anything extra installed.  Just make the necessary HTTP call, get a list of servers in a JSON format, loop over that list and deploy code to all those active nodes in a cluster.<br />
+<br />
+While you're at it, make sure you secure those HTTP API end-points using Consul's <a href="https://consul.io/docs/agent/encryption.html" target="_new">Encryption</a>.
+</p>
+
+<h3><a name="dns" class="anchor" href="#dns"><span class="octicon octicon-link"></span></a>Consul is a DNS server</h3>
+<p>
+  Did you know that Consul can be your <a href="https://consul.io/docs/agent/dns.html" target="_new">DNS server</a>?
+What better way to lookup the IP address of a node in your cluster than to use your Service Discovery tool Consul, which knows about all the machines you maintain.<br />
+The HTTP API is great for humans or applications to interact with Consul, but moving things down the system level, after querying the HTTP API for the names of the nodes, when the OS is interacting with the nodes it needs DNS lookups.  So let Consul do that for you!
+</p>
+
+<h3><a name="service-discovery" class="anchor" href="#service-discovery"><span class="octicon octicon-link"></span></a>Service Definitions and Checks</h3>
+<p>
+  Beyond just knowing what machines you have, Consul can be configured to watch over the <a href="https://consul.io/docs/agent/services.html" target="_new">Services</a> you run and monitor them with a <a href="https://consul.io/docs/agent/checks.html" target="_new">health check</a>.<br />
+  These Services and Checks can be used to pull nodes out of the API or DNS responses when a node becomes unhealthy. There are three types of Checks you can write.
+  <ol>
+    <li>A Script check</li>
+    <li>A HTTP check</li>
+    <li>A TTL check</li>
+  </ol>
+  These checks are expected to be run with high frequency.  The examples say every 10 seconds, but you'll adjust that number based on what frequency machines are coming and going from your app.
+</p>
+
+<h3><a name="watches" class="anchor" href="#watches"><span class="octicon octicon-link"></span></a>Watches</h3>
+<p>
+  <a href="https://consul.io/docs/agent/watches.html" target="_new">Watches</a> are how you can script Consul to react to changes in your infrastructure.  These scripts are called Handlers.<br />
+  <br />
+  Imagine you have a <a href="http://www.haproxy.org/" target="_new">HAProxy</a> load balancer sitting in front of your web application cluster.  And you have <a href="http://aws.amazon.com/autoscaling/" target="_new">AWS Auto Scaling</a> configured on the web cluster as well.  You'll have new machines coming and going as needed, but if HAProxy doesn't know about them, what's the point?<br />
+  So you'll use a Consul Watch to fire off a Handler that will update the HAProxy configuration file whenever a new host is detected in the web application cluster.<br />
+  <br />
+  Alternatively check out <a href="https://github.com/hashicorp/consul-template" target="_new">Consul Template</a> for a great example of this functionality with Consul.
+</p>
+
+<h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
+
+<p>We are going to complete the following actions, following along the example provided by <a href="http://progrium.com" target="_new">Jeff Lindsay</a> and his <a href="https://github.com/progrium/docker-consul" target="_new">docker-consul</a> container.</p>
+<ol>
+  <li>Get in the Automation Tool's git repo's <code>consul</code> directory in your terminal.</li>
+  <li><code>vagrant up</code> the VM that already has Docker installed and <code>vagrant ssh</code> in to it.  If prompted for Vagrant's password, it is vagrant.</li>
+  <li>Start a series of Consul agents in Docker containers<pre><code>sudo docker run -d --name han -h han progrium/consul -server -bootstrap-expect 3
+JOIN_IP="$(sudo docker inspect -f '{{.NetworkSettings.IPAddress}}' han)"
+echo $JOIN_IP
+sudo docker run -d --name chewbacca -h chewbacca progrium/consul -server -join $JOIN_IP
+sudo docker run -d --name leia -h leia progrium/consul -server -join $JOIN_IP</code></pre></li>
+  <li>We now have three Consul machines in a cluster (which we can see via <code>sudo docker ps</code>).  Let's add the fourth, the one which will expose the ports to communicate with the Consul cluster.<pre><code>sudo docker run -d -p 8400:8400 -p 8500:8500 -p 8600:53/udp --name luke -h luke progrium/consul -join $JOIN_IP</code></pre></li>
+  <li>View the <a href="http://localhost:8500/ui" target="_new">Consul WebUI</a> from the fourth container.  (Watch that port number in the URL in case Vagrant had a conflict and changed it for you)</li>
+  <li>View the HTTP API to <a href="http://localhost:8500" target="_new">list Consul nodes</a></li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+
+          <p class="repo-owner">Meetings<br />
+            <a href="./git.html">Intro to Git</a><br />
+            <a href="./git-workflows.html">Intro to Git Workflows</a><br />
+            <a href="./vagrant.html">Intro to Vagrant</a><br />
+            <a href="./chef.html">Intro to Chef</a><br />
+            <a href="./chef-in-practice.html">Chef in Practice</a><br />
+            <a href="./packer.html">Packer</a><br />
+            <a href="./node-mongodb.html">Intro to Node.js and MongoDB</a><br />
+            <a href="./docker.html">Intro to Docker</a><br />
+            <a href="./jenkins.html">Intro to Jenkins</a><br />
+          </p>
+
+          <p class="repo-owner">Is maintained by Tyler Fitch (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-53342610-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  
+  </body>
+</html>
