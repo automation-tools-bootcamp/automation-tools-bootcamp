@@ -67,6 +67,10 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "chef_zero" do |chef|
     chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "java"
     chef.add_recipe "docker"
   end
+
+  # since I'm uploading this box to share in the future, leaving it with insecure key
+  config.ssh.insert_key = false
 end
