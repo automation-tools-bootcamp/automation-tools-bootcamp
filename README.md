@@ -21,5 +21,5 @@ Project Participants
 ====================
 
 * Tyler Fitch
-* attendee 1
+* Derrick
 * attendee 2
