@@ -42,35 +42,44 @@ There are lots of tools in the monitoring space.
   <li><a href="https://www.newrelic.com" target="_new">New Relic</a></li>
   <li><a href="https://www.copperegg.com" target="_new">CopperEgg</a></li>
   <li><a href="https://www.boundary.com" target="_new">Boundary</a></li>
+  <li>Even <a href="http://www.consul.io/intro/vs/nagios-sensu.html" target="_new">Consul</a> has entered this space</li>
 </ul>
-So why pick Sensu - because those SaaS solutions have external dependencies on publishing agent data to them.<br />
+So why pick Sensu? Because those SaaS solutions have external dependencies on publishing agent data to them.<br />
 <br />
-Sensu can run on your network, keeping your data to yourself, live behind a firewall, and not rack up monthly charges to the SaaS provider.
+Sensu can run on your network, keeping your data to yourself, live behind a firewall, and not rack up monthly charges to the SaaS provider.  Plus, you can run it all locally on a laptop for testing and validation.
 </p>
 
 
 <h3><a name="installing-sensu" class="anchor" href="#installing-sensu"><span class="octicon octicon-link"></span></a>Installing Sensu</h3>
 <p>
-Installing Sensu info - client and server
+Sensu is a Ruby app/gem.  It runs on <a href="http://sensuapp.org/docs/0.16/packages" target="_new">Linux and Windows</a>.  It has a dependency on RabbitMQ and Redis for the server components.  As such, there is a <a href="https://github.com/sensu/sensu-chef" target="_new">Chef cookbook</a> or <a href="https://github.com/sensu/sensu-puppet" target="_new">Puppet module</a> to install Sensu and get all dependencies installed as well.<br />
+<br />
+Alternatively, you can just use a Docker container with Sensu installed, like <a href="https://registry.hub.docker.com/u/arcus/sensu/" target="_new">arcus/sensu</a>.
 </p>
 
-<h3><a name="advanced-sensu" class="anchor" href="#advanced-sensu"><span class="octicon octicon-link"></span></a>Advanced Sensu</h3>
+<h3><a name="extending-sensu" class="anchor" href="#extending-sensu"><span class="octicon octicon-link"></span></a>Extending Sensu</h3>
 <p>
-Once installed, lots of cool functionality is available to you
-<ul>
-  <li>Notifications</li>
-  <li>other things</li>
-</ul>
+What makes <a href="jenkins.html#what-else">Jenkins great</a>?<br />
+What also makes Sensu great?<br />
+<br>
+<a href="https://github.com/sensu/sensu-community-plugins" target="_new">THE PLUGINS!</a> - or more specifically - <a href="https://github.com/sensu/sensu-community-plugins/tree/master/plugins" target="_new">the plugins</a>.<br />
+<br />
+What is even better?  Sensu has been developed from the start to use all the Nagios monitors you've probably got laying around.  So don't waste the effort it took to develop them.  Just use them on a nicer platform!
 </p>
 
 <h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
 
 <p>We are going to complete the following actions with Sensu</p>
 <ol>
-  <li>Add a machine to our dev cluster and install Sensu on it</li>
-  <li>Install the Sensu agent on the other machines in the cluster</li>
-  <li>Configure agents to talk to our Sensu server</li>
-  <li>View a Dashboard of your app cluster</li>
+  <li>Get in the <code>sensu</code> directory of our app and <code>vagrant up</code> our trusty VM</li>
+  <li>Start up a Sensu server using a Docker container. <code>sudo docker run -d -p 8090:8080 -p 4567:4567 arcus/sensu</code></li>
+  <li>Install the <a href="http://sensuapp.org/docs/0.16/packages" target="_new">Sensu package</a> on the VM (which is running Ubuntu) so it will become a Sensu Agent.</li>
+  <li><a href="http://sensuapp.org/docs/0.16/guide" target="_new">Enable and start the Agent</a> as a service on the VM.</li>
+  <li>Start up Jenkins on the VM, same as how you did before.</li>
+  <li>Get the <code>check-jenkins.rb</code> from the <a href="https://github.com/sensu/sensu-community-plugins/tree/master/plugins/jenkins" target="_new">Jenkins plugins for Sensu</a></li>
+  <li>Install it as a <a href="http://sensuapp.org/docs/0.16/adding_a_check" target="_new">Sensu Check</a> on the VM</li>
+  <li>View the <a href="http://localhost:8090" target="_new">Sensu Dashboard</a></li>
+  <li>Stop Jenkins <code>ctrl-c</code> and watch the Sensu Dashboard again</li>
 </ol>
         </section>
 
