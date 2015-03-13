@@ -21,6 +21,6 @@ Project Participants
 ====================
 
 * Tyler Fitch
-* attendee 1
+* Jeff Korthuis
 * attendee 2
 * N.J. Thomas
