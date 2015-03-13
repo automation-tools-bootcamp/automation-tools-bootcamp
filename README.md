@@ -21,5 +21,5 @@ Project Participants
 ====================
 
 * Tyler Fitch
-* attendee 1
+* Jason Howe
 * attendee 2
