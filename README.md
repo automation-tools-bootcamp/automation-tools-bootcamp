@@ -34,3 +34,4 @@ Project Participants
 * Joseph Chilcote
 * James Kolafa
 * Derrick
+* Erik Peterson
