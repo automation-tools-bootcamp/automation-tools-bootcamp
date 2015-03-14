@@ -25,3 +25,4 @@ Project Participants
 * Daniel Rich
 * attendee 2
 * N.J. Thomas
+* Trevor Leffler
