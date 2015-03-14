@@ -30,3 +30,4 @@ Project Participants
 * jgaski
 * Paul English
 * Joseph Chilcote
+* James Kolafa
