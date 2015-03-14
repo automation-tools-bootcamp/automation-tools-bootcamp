@@ -29,3 +29,4 @@ Project Participants
 * Jason Howe
 * attendee 2
 * Paul English
+* Joseph Chilcote
