@@ -23,6 +23,6 @@ Project Participants
 * Tyler Fitch
 * Jeff Korthuis
 * Daniel Rich
-* attendee 2
+* Gilbert Wilson
 * N.J. Thomas
 * Trevor Leffler
