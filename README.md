@@ -26,3 +26,5 @@ Project Participants
 * Gilbert Wilson
 * N.J. Thomas
 * Trevor Leffler
+* Jason Howe
+* attendee 2
