@@ -27,6 +27,6 @@ Project Participants
 * N.J. Thomas
 * Trevor Leffler
 * Jason Howe
-* attendee 2
+* jgaski
 * Paul English
 * Joseph Chilcote
