@@ -1,5 +1,3 @@
-[Some Hooga Pooga is going to be occurring here!]
-
 Automation Tools Bootcamp
 =========================
 
