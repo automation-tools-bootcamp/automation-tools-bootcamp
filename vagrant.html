@@ -80,11 +80,27 @@ vagrant destroy   # wipes the server away to nothing
 
 <h3><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h3>
 
-<p>We are going to complete the following actions</p>
+<p>We are going to complete the following three actions<br />
+Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/vagrant/Vagrantfile" target="_new">example Vagrantfile</a> which you checked out during the Git sessions.</p>
+<h4>One - wreck the box and recover from that</h4>
 <ol>
-  <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/vagrant/Vagrantfile" target="_new">example Vagrantfile</a> which you checked out during the Git sessions.</li>
-  <li>Start up the single Vagrant box. <a href="http://localhost:8080" target="_new">http://localhost:8080</a>. Connect via SSH and then stop the Apache server from running <code>sudo service apache2 stop</code> and reload the webpage.</li>
-  <li>Start up the Vagrant cluster in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/vagrant/multi-box" target="_new">multi-box</a> directory.  Login to the box web1 (<code>vagrant ssh web1</code>and ping the box web3 on IP address <code>192.168.50.30</code></li>
+  <li>Start up the single Vagrant box.</li>
+  <li>Connect via SSH.</li>
+  <li>Then delete the entire <code>/etc</code> folder.</li>
+  <li>Halt the server and bring it back up.</li>
+  <li>Now bring up the server the way it was before you destroyed <code>/etc</code>.</li>
+</ol>
+<h4>Two - run one box as a webserver</h4>
+<ol>
+  <li>Start up the single Vagrant box.</li>
+  <li>View the VMs default webpage <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
+  <li>Connect via SSH and then stop the Apache server from running <code>sudo service apache2 stop</code>.</li>
+  <li>Finally, reload the webpage.</li>
+</ol>
+<h4>Three - run three boxes as a small cluster of machines</h4>
+<ol>
+  <li>Start up the Vagrant cluster in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/vagrant/multi-box" target="_new">multi-box</a> directory.</li>
+  <li>Login to the box web1 (<code>vagrant ssh web1</code>) and ping the box web3 on IP address <code>192.168.50.30</code></li>
   <li>View the default Apache page on <a href="http://localhost:8081" target="_new">web1</a>, <a href="http://localhost:8082" target="_new">web2</a> and <a href="http://localhost:8083" target="_new">web3</a>.</li>
 </ol>
         </section>
