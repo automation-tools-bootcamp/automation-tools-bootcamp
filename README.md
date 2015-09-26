@@ -5,7 +5,7 @@ A series of discussions about the development tools that enable automation of so
 
 Always Be Learning
 ==================
-It is important to not just do what's been done because that is the way we have operated in the past. http://programming.oreilly.com/2014/01/7-w ays-to-be-a-better-programmer-in-2014.html#two
+It is important to not just do what's been done because that is the way we have operated in the past. http://programming.oreilly.com/2014/01/7-ways-to-be-a-better-programmer-in-2014.html#two
 
 The [Developer Automation Tools Bootcamp](http://tfitch.com/automation-tools-bootcamp) is a series of topics for individuals looking for exposure to and usage of new development tools.  A progression of tasks, leveraging information from previous sessions to build a small app that runs identically on your local development computer or on a shared server.
 
