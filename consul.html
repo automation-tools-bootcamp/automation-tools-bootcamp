@@ -33,7 +33,7 @@
 
 <p><a href="http://consul.io" target="_new"><img src="images/consul-mini-logo.png" /></a><br />
   The team from <a href="http://hashicorp.com" target="_new">Hashicorp</a> <a href="./vagrant.html">strikes</a> <a href="./packer.html">again</a>.<br />
-  At its core Consul tackles one of the hardest problems facing IT departments today, Service Discovery.  But Consul is also great for Health Checks, Key/Value store and is Multi Datacenter aware.<br />
+  At its core Consul tackles one of the, in my opinion, hardest problems facing IT departments today, Service Discovery.  But Consul is also great for Health Checks, Key/Value Store and is Multi Datacenter aware.<br />
 <br />
 <a href="https://www.consul.io/intro/index.html" target="_new">Official Intro to Consul</a>
 </p>
@@ -57,9 +57,10 @@ While you're at it, make sure you secure those HTTP API end-points using Consul'
 
 <h3><a name="dns" class="anchor" href="#dns"><span class="octicon octicon-link"></span></a>Consul is a DNS server</h3>
 <p>
-  Did you know that Consul can be your <a href="https://consul.io/docs/agent/dns.html" target="_new">DNS server</a>?
-What better way to lookup the IP address of a node in your cluster than to use your Service Discovery tool Consul, which knows about all the machines you maintain.<br />
-The HTTP API is great for humans or applications to interact with Consul, but moving things down the system level, after querying the HTTP API for the names of the nodes, when the OS is interacting with the nodes it needs DNS lookups.  So let Consul do that for you!
+  Did you know that Consul can be your <a href="https://consul.io/docs/agent/dns.html" target="_new">DNS server</a>?<br />
+What better way to lookup the IP address of a node in your cluster than to use your Service Discovery tool Consul, which knows about all the machines you maintain as soon as they come or go.<br />
+Whether you want to know the IP of another node in you application, or if you want to look up the name and address of the healthy message queue server is your West Data Center, Consul can be your DNS server that knows and serves this information.<br />
+Now you do not need to run separate DNS Servers or Services, it comes bundled in the functionality of your Consul nodes. So feel free to take advantage of it.
 </p>
 
 <h3><a name="service-discovery" class="anchor" href="#service-discovery"><span class="octicon octicon-link"></span></a>Service Definitions and Checks</h3>
