@@ -44,20 +44,20 @@ Or even better - <a href="https://docs.docker.com/introduction/understanding-doc
 
 <h3><a name="docker-411" class="anchor" href="#docker-411"><span class="octicon octicon-link"></span></a>Docker Basics</h3>
 <p>
-Getting started with Docker requires a few things<br />
+Getting started with Docker requires a few things:<br />
 <ol>
-  <li>Install Docker on your local machine, probably with <a href="https://github.com/boot2docker/boot2docker" target="_new">Boot2Docker</a></li>
+  <li>Install Docker on your local machine with <a href="https://www.docker.com/toolbox" target="_new">Docker Toolbox</a>.  Or if you've previously installed Docker you might have installed <a href="https://github.com/boot2docker/boot2docker" target="_new">Boot2Docker</a>.</li>
   <li>Pick a container with your favorite technology from <a href="https://hub.docker.com/" target="_new">the Hub</a> to run.</li>
-  <li><code>docker run  --name automation-tools-web -d -p 8080:8080 nginx</code> to start things up</li>
+  <li><code>docker run  --name automation-tools-web -d -p 8080:8080 nginx</code> to start things up.</li>
 </ol>
-Your container is downloaded, deployed and running<br />
+Your container is downloaded, deployed and running.<br />
 <br />
 Did you think there'd be more?
 </p>
 
 <h3><a name="docker-repositories" class="anchor" href="#docker-repositories"><span class="octicon octicon-link"></span></a>Docker Hub/Repositories</h3>
 <p>
-Docker's ability to find public containers is based on using the <a href="https://hub.docker.com/" target="_new">Docker Hub</a>.  But you can run private registries as well so you can keep your containers inside your firewall/data center.  Check out <a href="http://www.jfrog.com/confluence/display/RTF/Docker+Repositories" target="_new">Artifactory</a> to be your Docker Registry (and npm cache and Ruby Gem repo and Maven repo).  Artifactory is very helpful.<br />
+Docker's ability to find public containers is based on using the <a href="https://hub.docker.com/" target="_new">Docker Hub</a>.  But you can run private registries as well, so you can keep your containers inside your firewall/data center.  Check out <a href="http://www.jfrog.com/confluence/display/RTF/Docker+Repositories" target="_new">Artifactory</a> to be your Docker Registry (and npm cache and Ruby Gem repo and Maven repo).  Artifactory is very helpful.<br />
 <br />
 Application developers will maintain their own containers, so you just need to overlay your application code.  This can rapidly speed your development <em>and</em> deployment cycles.  When an application is updated, the provider will update their container and you'll get the new version of the app.<br />
 <br />
@@ -73,25 +73,25 @@ That said don't go trusting containers from out in the wild.
 
 <h3><a name="build-your-container" class="anchor" href="#build-your-container"><span class="octicon octicon-link"></span></a>Building your own Docker container</h3>
 <p>
-A <a href="https://docs.docker.com/articles/dockerfile_best-practices/" target="_new">Dockerfile</a> will generate your own Container for you, your apps installed, even your code installed.<br />
+A <a href="https://docs.docker.com/articles/dockerfile_best-practices/" target="_new">Dockerfile</a> will generate your own Container for you with your applications and even your code installed.<br />
 <br />
 Container history is similar to a project's Git history.  Docker containers start from a read-only base image and then have (usually) small diffs as they are versioned.
 <img src="./images/docker-filesystems-multilayer.png" /><br />
-The pieces of a Dockerfile
+The pieces of a Dockerfile:
 <ul>
-  <li><code>FROM</code> - which image your container will begin form</li>
+  <li><code>FROM</code> - which image your container will begin form.</li>
   <li><code>MAINTAINER</code> - you.  Own your work!</li>
-  <li><code>EXPOSE</code> - any ports you need opened up from the container</li>
-  <li><code>RUN</code> - Run this command on the container.  A Dockerfile have mulitple <code>RUN</code> lines. Poor man's Config Management</li>
-  <li><code>CMD</code> - command that will run when the container starts. Can be overrode from the command line</li>
+  <li><code>EXPOSE</code> - any ports you need opened up from the container.</li>
+  <li><code>RUN</code> - Run this command on the container.  A Dockerfile have mulitple <code>RUN</code> lines. Poor man's Config Management.</li>
+  <li><code>CMD</code> - command that will run when the container starts. Can be overrode from the command line.</li>
   <li><code>ENTRYPOINT</code> - like <code>CMD</code> but *cannot* be overrode.</li>
-  <li><code>WORKDIR</code> - akin to using CD</li>
+  <li><code>WORKDIR</code> - akin to using CD.</li>
   <li><code>ADD</code> - adds files and directories from our build environment into our image. Can unpack archived files.</li>
   <li><code>COPY</code> - like <code>ADD</code> but without extraction or decompression capabilities.</li>
-  <li><code>VOLUME</code> - create a volume on the container. Often with data from the host.  Can be shared with multiple containers</li>
-  <li><code>USER</code> - specifies a user the image should be run as</li>
+  <li><code>VOLUME</code> - create a volume on the container. Often with data from the host.  Can be shared with multiple containers.</li>
+  <li><code>USER</code> - specifies a user the image should be run as.</li>
   <li><code>ONBUILD</code> - executes a trigger (e.g. <code>ADD</code> or <code>COPY</code>) when the image is used as the basis for another image.</li>
-  <li><code>ENV</code> - set environment variables during image build process</li>
+  <li><code>ENV</code> - set environment variables during image build process.</li>
 </ul>
 </p>
 
@@ -110,23 +110,23 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
 
 <h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
 
-<p>We are going to complete the following actions</p>
+<p>We are going to complete the following actions:</p>
 <ol>
   <li><a href="https://docs.docker.com/installation/" target="_new">Install Docker</a> on your machine or use the provided <code>Vagrantfile</code> in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/docker" target="_new">code repo</a>.</li>
   <li>Create a <a href="https://hub.docker.com/account/signup/" target="_new">Docker Hub account</a>.</li>
   <li>The Automation Tools git repo has a <code>docker</code> directory with a Dockerfile and small Node.js app.</li>
-  <li>Make yourself the <code>MAINTAINER</code> of the Dockerfile</li>
-  <li>Use <code>RUN</code> to make a directory for your application in the container</li>
-  <li><code>WORKDIR</code> to where you put the package.json file</li>
-  <li><code>ADD</code> or <code>COPY</code> the <code>package.json</code> file to the container</li>
-  <li><code>RUN</code> the command <code>npm install</code></li>
-  <li><code>ADD</code> or <code>COPY</code> the <code>app.js</code> file to the container</li>
-  <li><code>CMD</code> or <code>ENTRYPOINT</code> the app with <code>npm start</code></li>
-  <li>You'll want to <code>EXPOSE</code> port 3000 to view the sample app</li>
-  <li>Make a <code>docker build</code> of the new container.  Tag it <code>-t &lt;userid&gt;/automation-tools-nodejs</code></li>
-  <li>Now it's time to <code>docker run</code> that new container.  <code>sudo docker run -it --rm -p=3000:3000 --name my-running-app &lt;userid&gt;/automation-tools-nodejs</code></li>
+  <li>Make yourself the <code>MAINTAINER</code> of the Dockerfile.</li>
+  <li>Use <code>RUN</code> to make a directory for your application in the container.</li>
+  <li><code>WORKDIR</code> to where you put the package.json file.</li>
+  <li><code>ADD</code> or <code>COPY</code> the <code>package.json</code> file to the container.</li>
+  <li><code>RUN</code> the command <code>npm install</code>.</li>
+  <li><code>ADD</code> or <code>COPY</code> the <code>app.js</code> file to the container.</li>
+  <li><code>CMD</code> or <code>ENTRYPOINT</code> the app with <code>npm start</code>.</li>
+  <li>You'll want to <code>EXPOSE</code> port 3000 to view the sample app.</li>
+  <li>Make a <code>docker build</code> of the new container.  Tag it <code>-t &lt;userid&gt;/automation-tools-nodejs</code>.</li>
+  <li>Now it's time to <code>docker run</code> that new container.  <code>sudo docker run -it --rm -p=3000:3000 --name my-running-app &lt;userid&gt;/automation-tools-nodejs</code>.</li>
   <li><a href="http://localhost:3000" target="_new">View the app in your browser</a>.</li>
-  <li>Use <code>docker push &lt;userid&gt;/automation-tools-nodejs</code> to upload you image to the Docker Hub</li>
+  <li>Use <code>docker push &lt;userid&gt;/automation-tools-nodejs</code> to upload you image to the Docker Hub.</li>
 </ol>
         </section>
 
@@ -146,7 +146,7 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
             <a href="./sensu.html">Intro to Sensu</a><br />
           </p>
 
-          <p class="repo-owner">Is maintained by <a href="http://tfitch.com/about/" target="_new">Tyler Fitch</a> (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
+          <p class="repo-owner">Maintained by <a href="http://tfitch.com/about/" target="_new">Tyler Fitch</a> (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
 
           <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>

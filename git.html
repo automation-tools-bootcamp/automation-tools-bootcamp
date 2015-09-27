@@ -35,7 +35,7 @@
   <a href="https://www.atlassian.com/git" target="_new">Great overview of Git from Atlassian</a><br />
   <br />
   This does *not* cover branching.<br />
-  If you know the above stuff then hop on over to the fancy stuff in Git like available workflows that users can adopt when using Git.  You can look at two - <a href="./git-workflows.html#fork-pull-request">Fork + Pull Request</a> and <a href="./git-workflows.html#git-flow">Git Flow</a> on the <a href="./git-workflows.html">Git Workflows</a> section.  Pick the right one for your project and start coding.
+  If you know the above stuff then hop on over to the fancy stuff in Git, like workflows users can adopt when using Git.  You can look at two - <a href="./git-workflows.html#fork-pull-request">Fork + Pull Request</a> and <a href="./git-workflows.html#git-flow">Git Flow</a> on the <a href="./git-workflows.html">Git Workflows</a> section.  Pick the right one for your project and start coding.
 </p>
 
 <h3><a name="git-benefits" class="anchor" href="#git-benefits"><span class="octicon octicon-link"></span></a>Benefits of Git</h3>
@@ -44,7 +44,7 @@
   <li>Only checking in some of your edited files</a>
   <li><a href="http://git-scm.com/docs/gitignore" target="_new">.gitignore</a></li>
   <li>Use in Open Source Software projects</li>
-  <li>Multiple client options - check out <a href="http://www.sourcetreeapp.com/" target="_new">SourceTree</a> it is free!</li>
+  <li>Multiple client options - check out <a href="http://www.sourcetreeapp.com/" target="_new">SourceTree</a>.  It is free!</li>
   <li>GitHub Bonus: Gists (think pastebin)</li>
   <li>GitHub repo browser plugin for Chrome called <a href="https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc?hl=en-US" target="_new">Octotree</a></li>
   <li>Subjectively: Git makes me happy compared to other version control systems</li>
@@ -62,9 +62,9 @@ $ git checkout gh-pages
 <h3><a name="checkout" class="anchor" href="#checkout"><span class="octicon octicon-link"></span></a>Checkout a Git repository</h3>
 
 <p>
-  If you want to edit some code or build it locally you are going to need to check it out from the source.  That source is a URI that can look like <code>git@github.com:tfitch/automation-tools-bootcamp.git</code> or <code>https://github.com/tfitch/automation-tools-bootcamp.git</code><br />
+  If you want to edit some code or build it locally, you are going to need to check it out from the source.  That source is a URI that can look like <code>git@github.com:tfitch/automation-tools-bootcamp.git</code> or <code>https://github.com/tfitch/automation-tools-bootcamp.git</code><br />
   <br />
-  The git protocol will run over ssh and use a key based authorization when communicating to the server.  The HTTP(S) connection to a Git repo is valid and can pass a username/password for authorization to achieve the same functionality as the git/ssh protocol uses.  When needed, the HTTP connection is a great backup when a firewall is blocking ssh connections.
+  The git protocol will run over ssh and use a key based authorization when communicating to the server.  The HTTP(S) connection to a Git repo is valid and can pass a username/password for authorization to achieve the same functionality as the git/ssh protocol uses.  The HTTP connection is a great backup when a firewall is blocking ssh connections.
   <img src="./images/git-checkout-uri.png" alt="GitHub project URL" />
 </p>
 
@@ -72,8 +72,8 @@ $ git checkout gh-pages
 
 <p>
   <ul>
-    <li>If you like the command line. <code>git init</code> <a href="http://git-scm.com/docs/git-init" target="_new">http://git-scm.com/docs/git-init</a></li>
-    <li>If you like a GUI - push the button(s).<br />
+    <li>If you like the command line: <code>git init</code> <a href="http://git-scm.com/docs/git-init" target="_new">http://git-scm.com/docs/git-init</a></li>
+    <li>If you like a GUI: push the button(s).<br />
   <img src="./images/git-gui-new-repo.png" alt="SourceTree New Repository button being pushed." />
     </li>
   </ul>
@@ -84,7 +84,7 @@ $ git checkout gh-pages
 <p>
   Now that you have your repo checked out, feel free to edit your files with your <a href="http://www.sublimetext.com/" target="_new">favorite text editor</a>.  That's it.  No second checkout/making writeable like with Perforce.  Just start working without Git being in your way.<br />
   <br />
-  You've edited your files so let's look at what has been edited?<br />
+  You've edited your files so let's look at what has been edited.<br />
   <code>git status</code> <a href="http://git-scm.com/docs/git-status" target="_new">http://git-scm.com/docs/git-status</a><br />
   <img src="./images/git-status-cli.png" alt="git status from the command line" /><br />
   Or you're using a GUI based tool.<br />
@@ -103,7 +103,7 @@ $ git checkout gh-pages
 <h3><a name="checkin" class="anchor" href="#checkin"><span class="octicon octicon-link"></span></a>Checking in your edited files</h3>
 <p>
   All the prep work is done.  You're ready to make your edit real and commit to it.<br />
-  <code>git commit -m "My commit message for my change"</code> <a href="http://git-scm.com/docs/git-commit" target="_new">http://git-scm.com/docs/git-commit></a>
+  <code>git commit -m "My commit message for my change"</code> <a href="http://git-scm.com/docs/git-commit" target="_new">http://git-scm.com/docs/git-commit</a>
 </p>
 
 <h3><a name="push-it" class="anchor" href="#push-it"><span class="octicon octicon-link"></span></a>Push it real good.</h3>
@@ -113,7 +113,7 @@ $ git checkout gh-pages
   Why not?  Git is a Distributed Version Control System.  Your committed changes aren't also someone else's changes until you <code>git push</code> them back to the origin. <a href="http://git-scm.com/docs/git-push" target="_new">http://git-scm.com/docs/git-push</a>
 </p>
 
-<h3><a name="pull-it" class="anchor" href="#pull-it"><span class="octicon octicon-link"></span></a>Pull it over.</h3>
+<h3><a name="pull-it" class="anchor" href="#pull-it"><span class="octicon octicon-link"></span></a>Pull it over</h3>
 <p>
   You're not coding on an island.  Along with pushing your changes up to the origin, you need to <code>git pull</code> changes from origin that are being added to your project. <a href="http://git-scm.com/docs/git-pull" target="_new">http://git-scm.com/docs/git-pull</a><br />
   <br />

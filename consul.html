@@ -42,15 +42,15 @@
 <p>
 Consul's main interface to its functionality is via a RESTful <a href="https://consul.io/docs/agent/http.html" target="_new">HTTP API</a>.<br />
 <br />
-Using the HTTP API for Consul you can
+Using the HTTP API for Consul you can:
 <ul>
   <li>Serve up custom values for you over HTTP using their <a href="https://consul.io/docs/agent/http/kv.html" target="_new">kv (Key/Value) store</a>.</li>
-  <li>Register and deregister nodes, services and checks with the <a href="https://consul.io/docs/agent/http/catalog.html" target="_new">Catalog Endpoint</a></li>
-  <li><a href="https://consul.io/docs/agent/http/health.html" target="_new">Health Check</a> a node or service</li>
+  <li>Register and deregister nodes, services and checks with the <a href="https://consul.io/docs/agent/http/catalog.html" target="_new">Catalog Endpoint</a>.</li>
+  <li><a href="https://consul.io/docs/agent/http/health.html" target="_new">Health Check</a> a node or service.</li>
   <li>View the <a href="https://consul.io/docs/agent/http/status.html" target="_new">Status</a> of the Consul cluster.</a></li>
   <li>And more</li>
 </ul>
-Why expose all this info via APIs?  Because then external tools like <a href="./jenkins.html">Jenkins</a> can start interacting with Consul without needing anything extra installed.  Just make the necessary HTTP call, get a list of servers in a JSON format, loop over that list and deploy code to all those active nodes in a cluster.<br />
+Why expose all this info via APIs?  Because then external tools like <a href="./jenkins.html">Jenkins</a> can start interacting with Consul without needing anything extra installed.  Just make the necessary HTTP call, get a list of servers in a JSON format, loop over that list and deploy code to all active nodes in a cluster.<br />
 <br />
 While you're at it, make sure you secure those HTTP API end-points using Consul's <a href="https://consul.io/docs/agent/encryption.html" target="_new">Encryption</a>.
 </p>
@@ -58,8 +58,8 @@ While you're at it, make sure you secure those HTTP API end-points using Consul'
 <h3><a name="dns" class="anchor" href="#dns"><span class="octicon octicon-link"></span></a>Consul is a DNS server</h3>
 <p>
   Did you know that Consul can be your <a href="https://consul.io/docs/agent/dns.html" target="_new">DNS server</a>?<br />
-What better way to lookup the IP address of a node in your cluster than to use your Service Discovery tool Consul, which knows about all the machines you maintain as soon as they come or go.<br />
-Whether you want to know the IP of another node in you application, or if you want to look up the name and address of the healthy message queue server in your West Data Center, Consul can be your DNS server that knows and serves this information.<br />
+What better way to lookup the IP address of a node in your cluster, than to use your Service Discovery tool Consul, which knows about all the machines you maintain as soon as they come or go.<br />
+Whether you want to know the IP of another node in your application, or if you want to look up the name and address of the healthy message queue server in your West Data Center, Consul can be your DNS server that knows and serves this information.<br />
 Now you do not need to run separate DNS Servers or Services, it comes bundled in the functionality of your Consul nodes. So feel free to take advantage of it.
 </p>
 
@@ -72,33 +72,33 @@ Now you do not need to run separate DNS Servers or Services, it comes bundled in
     <li>A HTTP check</li>
     <li>A TTL check</li>
   </ol>
-  These checks are expected to be run with high frequency.  The examples say every 10 seconds, but you'll adjust that number based on what frequency machines are coming and going from your app.
+  These checks are expected to be run with high frequency.  The examples say every 10 seconds, but you can adjust that number based on what frequency machines are coming and going from your app.
 </p>
 
 <h3><a name="watches" class="anchor" href="#watches"><span class="octicon octicon-link"></span></a>Watches</h3>
 <p>
   <a href="https://consul.io/docs/agent/watches.html" target="_new">Watches</a> are how you can script Consul to react to changes in your infrastructure.  These scripts are called Handlers.<br />
   <br />
-  Imagine you have a <a href="http://www.haproxy.org/" target="_new">HAProxy</a> load balancer sitting in front of your web application cluster.  And you have <a href="http://aws.amazon.com/autoscaling/" target="_new">AWS Auto Scaling</a> configured on the web cluster as well.  You'll have new machines coming and going as needed, but if HAProxy doesn't know about them, what's the point?<br />
-  So you'll use a Consul Watch to fire off a Handler that will update the HAProxy configuration file whenever a new host is detected in the web application cluster.<br />
+  Imagine you have a <a href="http://www.haproxy.org/" target="_new">HAProxy</a> load balancer sitting in front of your web application cluster.  And you have <a href="http://aws.amazon.com/autoscaling/" target="_new">AWS Auto Scaling</a> configured on the web cluster as well.  New machines will be coming and going as needed, but if HAProxy doesn't know about them, what's the point?<br />
+  Use a Consul Watch to fire off a Handler that will update the HAProxy configuration file whenever a new host is detected in the web application cluster.<br />
   <br />
-  Alternatively check out <a href="https://github.com/hashicorp/consul-template" target="_new">Consul Template</a> for a great example of this functionality with Consul.
+  Alternatively, check out <a href="https://github.com/hashicorp/consul-template" target="_new">Consul Template</a> for a great example of this functionality with Consul.
 </p>
 
 <h2><a name="workout" class="anchor" href="#workout"><span class="octicon octicon-link"></span></a>Workout</h2>
 
 <p>We are going to complete the following actions, following along the example provided by <a href="http://progrium.com" target="_new">Jeff Lindsay</a> and his <a href="https://github.com/progrium/docker-consul" target="_new">docker-consul</a> container.</p>
 <ol>
-  <li>Get in the Automation Tool's git repo's <code>consul</code> directory in your terminal.</li>
-  <li><code>vagrant up</code> the VM that already has Docker installed and <code>vagrant ssh</code> in to it.  If prompted for Vagrant's password, it is vagrant.</li>
+  <li>Go to the Automation Tool's git repo's <code>consul</code> directory in your terminal.</li>
+  <li><code>vagrant up</code> the VM that already has Docker installed and <code>vagrant ssh</code> into it.  If prompted for Vagrant's password, it is vagrant.</li>
   <li>Start a series of Consul agents in Docker containers<pre><code>sudo docker run -d --name han -h han progrium/consul -server -bootstrap-expect 3
 JOIN_IP="$(sudo docker inspect -f '{{.NetworkSettings.IPAddress}}' han)"
 echo $JOIN_IP
 sudo docker run -d --name chewbacca -h chewbacca progrium/consul -server -join $JOIN_IP
 sudo docker run -d --name leia -h leia progrium/consul -server -join $JOIN_IP</code></pre></li>
-  <li>We now have three Consul machines in a cluster (which we can see via <code>sudo docker ps</code>).  Let's add the fourth, the one which will expose the ports to communicate with the Consul cluster.<pre><code>sudo docker run -d -p 8400:8400 -p 8500:8500 -p 8600:53/udp --name luke -h luke progrium/consul -join $JOIN_IP</code></pre></li>
-  <li>View the <a href="http://localhost:8500/ui" target="_new">Consul WebUI</a> from the fourth container.  (Watch that port number in the URL in case Vagrant had a conflict and changed it for you)</li>
-  <li>View the HTTP API to <a href="http://localhost:8500" target="_new">list Consul nodes</a></li>
+  <li>We now have three Consul machines in a cluster (which we can see via <code>sudo docker ps</code>).  Let's add a fourth; the one which will expose the ports to communicate with the Consul cluster.<pre><code>sudo docker run -d -p 8400:8400 -p 8500:8500 -p 8600:53/udp --name luke -h luke progrium/consul -join $JOIN_IP</code></pre></li>
+  <li>View the <a href="http://localhost:8500/ui" target="_new">Consul WebUI</a> from the fourth container.  (Watch that port number in the URL in case Vagrant had a conflict and changed it for you.)</li>
+  <li>View the HTTP API to <a href="http://localhost:8500" target="_new">list Consul nodes</a>.</li>
 </ol>
         </section>
 
@@ -118,7 +118,7 @@ sudo docker run -d --name leia -h leia progrium/consul -server -join $JOIN_IP</c
             <a href="./sensu.html">Intro to Sensu</a><br />
           </p>
 
-          <p class="repo-owner">Is maintained by <a href="http://tfitch.com/about/" target="_new">Tyler Fitch</a> (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
+          <p class="repo-owner">Maintained by <a href="http://tfitch.com/about/" target="_new">Tyler Fitch</a> (<a href="https://twitter.com/tfitch" target="_new">@tfitch</a>).</p>
 
           <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
