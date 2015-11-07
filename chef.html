@@ -31,23 +31,37 @@
           <h3><a name="introduction-to-chef" class="anchor" href="#introduction-to-chef"><span class="octicon octicon-link"></span></a>Introduction to Chef</h3>
 
 <img src="./images/chef-logo.png" align="right" />
-<p>Of all the bootcamp subjects to cover this one is the most impossible to present properly in one hour.  We will be able to cover "What Chef is" but not as much about "How Chef does it".  That said, with the info here you will create a simple cookbook to configure a server.</p>
+<p>Of all the bootcamp subjects to cover this one is the most frustrating to present properly in one hour.  We will be able to cover "Why Chef exists," and "What Chef is," but not as much about "How Chef does it".  That said, with the info here you will create a simple cookbook to configure a server.</p>
+
+<h3><a name="why-chef" class="anchor" href="#why-chef"><span class="octicon octicon-link"></span></a>What problems does Chef solve?</h3>
+
+Chef is an <em>Infrastructure Automation Frameworks</em>, so that it's more than a tool, a language or a single product. The issues Chef addresses include:
+<ul>
+  <li>How to specify what a system does as a description of state, instead of an aggregation of Bash/Perl/Python scripts.
+  <li>How to maintain many systems over time in a consistent, repeatable manner (where 'many' is anywhere between 1 and 250,000)
+  <li>How to assure that machines in identical <em>roles</em> behave the same in different environments, e.g. between dev, staging and production.
+  <li>How to verify and test your changes before touching anything in your live infrastructure.
+</ul>
+
+The end goal: <strong>You can rebuild your entire infrastructure</strong> from your version-control system, your data-layer backup, and fresh hardware.
+
+Starting analogy: "Chef is to systems as yum/apt are to package management"
 
 <h3><a name="chef-from-chef" class="anchor" href="#chef-from-chef"><span class="octicon octicon-link"></span></a>Chef is a product from <a href="http://www.chef.io/" target="_new">Chef</a></h3>
 
 <ul>
   <li>Chef will install and configure software for your server (or VM of a server) - or even your laptop if you wanted.</li>
-  <li>Chef is a DSL based on Ruby. Knowing Ruby is helpful but not required.</li>
-  <li>Almost everything from <a href="https://github.com/chef" target="_new">Chef is open source</a>.  Including the <a href="https://github.com/chef-cookbooks" target="_new">community cookbooks Chef maintains</a>.</li>
-  <li>You write recipes which are stored in cookbooks.  A knife does most of the work.  (LOTS of cooking related names.)</li>
-  <li>It is generally assumed you are using Git with Chef.  Git is not required, but some tools in the Chef ecosystem will actually try and execute Git commands.</li>
-  <li>Chef and its ecosystem of tools are advancing at a pace I've never seen in a tool.  It is *hard* to keep to up date (and it's my part of my job).</li>
+  <li>Chef is a Ruby DSL (domain-specific languate). Knowing Ruby is helpful but not required.</li>
+  <li>Almost everything from <a href="https://github.com/chef" target="_new">Chef is open source</a>.  Including the <a href="https://github.com/chef-cookbooks" target="_new">community <it>cookbooks</it> Chef maintains</a>.</li>
+  <li>You write <it>recipes</it> which are stored in cookbooks.  A <it>knife</it> does most of the work.  (LOTS of cooking-related names.)</li>
+  <li>It is assumed you are using version-control with Chef, generally Git.  Git is not required, but some tools in the Chef ecosystem will actually try and execute Git commands.</li>
+  <li>Chef and its ecosystem of tools are advancing at a pace I've rarely seen in a tool.  It is *hard* to keep to up date (and it's my part of my job).</li>
   <li>Wanna learn how to do something in a Chef cookbook?  Cookbooks in the <a href="https://supermarket.chef.io" target="_new">Chef Supermarket</a> have examples of just about everything. Don't reinvent the wheel.</li>
 </ul>
 
 <h3><a name="best-practices" class="anchor" href="#best-practices"><span class="octicon octicon-link"></span></a>All the best practices of software development are available</h3>
 
-<p>The Ruby community is excellent at the practice of TDD (Test Driven Development).  This has, thankfully, carried over to the Chef community.  The tools exist, they increase the learning curve, but prevent bad check-ins when used properly.</p>
+<p>The Ruby community is excellent at the practice of TDD (Test Driven Development).  This has, thankfully, carried over to the Chef community, which has developed a suite of testing tools. These tools may add some time to your development initially, but their use pays off quickly, and they help increase both your velocity <em>and</em> stability in the long run.</p>
 
 <ul>
   <li>Dependency management - <a href="http://berkshelf.com/" target="_new">Berkshelf</a></li>
@@ -56,17 +70,20 @@
   <li>Integration Testing - <a href="http://kitchen.ci/" target="_new">Test Kitchen</a></li>
   <li>All these tools are so useful, Chef bundled them together into <a href="http://docs.chef.io/devkit/" target="_new">the Chef DK.</a></li>
   <li>Automation of linting, unit testing and interation testing after a code check in can be done in Countinuous Integration tools like <a href="./jenkins.html">Jenkins</a>, just like building other software projects</li>
-  <li>Successful completion of the above steps would indicate a working cookbook change and your CI server can publish the change to the Chef server for managed machines to pull down the update and apply it.</li>
+  <li>Successful completion of the above steps within your CI server would indicate a working cookbook change and your CI server can then publish the change to the Chef server for managed machines to pull down the update and apply it.</li>
 </ul>
 
 <h3><a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h3>
 
-<p><a href="http://learnchef.com" target="_new">LearnChef</a> has well crafted tutorials based on your prefered client OS, as well as numerous other webinars and tutorials.  Follow the steps as described and you'll accomplish more in an hour than you'd expect!</p>
+<p><a href="http://learnchef.com" target="_new">LearnChef</a> has well-crafted tutorials based on your prefered client OS, as well as numerous other webinars and tutorials.  The site provisions a virtual machine for you during the guided tours. Follow the steps as described and you'll accomplish more in an hour than you'd expect!</p>
 
 <h3><a name="server-client" class="anchor" href="#server-client"><span class="octicon octicon-link"></span></a>Chef Server/Client</h3>
-<p>The Chef Client's interactions with the Chef Server are a REST based API actually.<br />
-<br />
-Whether you are using <code>knife</code> or the Chef Server's UI, they will end up showing you the same information as gathered from the Server via those REST API requests.  In some mature Chef environments users will not even have the Chef Manage UI installed on their Chef Server and instead they just use <code>knife</code> commands to request the information they need to know about their Chef managed nodes.</p>
+
+<p>All of the configuration of your node is done by the <em>Chef Client</em>. That client (sometimes called an agent) processes a <em>runlist</em> of cookbooks, evaluates them based on the node's <em>attributes</em>, and then fixes any resources on the node that aren't yet matching the cookbook description.</p>
+
+<p>The Chef Server stores the cookbooks and node information for Chef Clients. The Chef Client's interacts with the Chef Server over a REST API, and when you need to update cookbooks or other site information you use that API too, through tools like <em>knife</em> or the server's web Manage UI.</p>
+
+<p>Whether you are using <code>knife</code> or the Chef Server's Manage UI, they will end up showing you the same information as gathered from the Server via those REST API requests.  In some mature Chef environments users will not even have the Chef Manage UI installed on their Chef Server and instead they just use <code>knife</code> commands to request the information they need to know about their Chef managed nodes.</p>
 
 <h3><a name="the-wheel" class="anchor" href="#the-wheel"><span class="octicon octicon-link"></span></a>Do not reinvent the wheel</h3>
 
@@ -88,7 +105,7 @@ DONE AND DONE.  MongoDB is installed.</p>
 <h3><a name="have-to" class="anchor" href="#have-to"><span class="octicon octicon-link"></span></a>Do not reinvent the wheel (unless you have to)</h3>
 <p>The community cookbooks are robust and often, but not always, support a wide range of configuration options (like host name, app install directory).<br />
 <br />
-BUT - sometimes (read: often) the community cookbook just isn't right.  Go ahead and roll your own.  Spin up a base Vagrant VM.  Run some commands to install your software just the way you need.  Then copy those commands in to a cookbook.  Copy any config files to your cookbook too.  Now you can reproduce your app install as many times as needed.  OR - contribute a change back to the community cookbook via a GitHub Pull Request.  <a href="http://tfitch.github.io/automation-tools-bootcamp/git-workflows.html#fork-pull-request" target="_new">We know how to do that.</a>
+BUT - sometimes (read: often) the community cookbook just isn't right.  Go ahead and roll your own.  Spin up a base Vagrant VM.  Run some commands to install your software just the way you need.  Then use those commands as the model for writing your cookbook with Chef resources, such as <em>package</em>, <em>file</em>, and <em>service</em>.   Now you can reproduce your app install as many times as needed.  OR - contribute a change back to the community cookbook via a GitHub Pull Request.  <a href="http://tfitch.github.io/automation-tools-bootcamp/git-workflows.html#fork-pull-request" target="_new">We know how to do that.</a>
 </p>
 
 <h3><a name="create-cookbook" class="anchor" href="#create-cookbook"><span class="octicon octicon-link"></span></a>Create our first cookbook</h3>
@@ -100,17 +117,18 @@ package 'apache2' do
   action :install
 end
 </code></pre>
-You've done it.  Apache 2 will be installed.  Congrats.
+You've done it.  Apache 2 will be installed when Chef Client runs.  Congrats.
 </p>
 
 <h3><a name="test-kitchen" class="anchor" href="#test-kitchen"><span class="octicon octicon-link"></span></a>Test Kitchen</h3>
 <img src="./images/test_kitchen.png" align="right" width="300" />
 <p>
-Very good.  Now to test it.  You'll need the Chef Server, then upload the cookbook to the server, install the chef-client and register the Vagrant VM with the Chef Server (called bootstrapping a Chef node), and then finally converge the node to see if your cookbook works.  Sounds like a pain in the butt and it was.  With some Vagrant plugins the process was bearable, but still clunky.<br />
+Very good. Now to test it. A few years ago, you'd approach testing like this: a) have a Chef Server handy, b) upload the cookbook to the server, c) install the chef-client on a Vagrant VM, d) register the Vagrant VM with the Chef Server, e) converge the node, and f) verify that your cookbook worked. Sounds like a pain in the butt and it was.  With some Vagrant plugins the process was bearable, but still clunky.<br />
 <br />
-But <a href="https://github.com/fnichol" target="_new">Flether Nichol</a> decided we should have a better experience and instead created <a href="http://kitchen.ci/" target="_new">Test Kitchen</a>.  Similar to the joy that Mitchell Hashimoto delivered by putting VM settings in a Vagrantfile, Fletcher took Configuration Management testing to the next step and now we create .kitchen.yml files.<br />
+But <a href="https://github.com/fnichol" target="_new">Flether Nichol</a> decided we should have a better experience and instead created <a href="http://kitchen.ci/" target="_new">Test Kitchen</a>.  Similar to the joy that Mitchell Hashimoto delivered by putting VM settings in a Vagrantfile, Fletcher took Configuration Management testing to the next step and now we create <code>.kitchen.yml</code> files to describe our tests.<br />
 <br />
-We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef server with Chef Zero (or use a real Chef server if that's your thing), spin up your desired machine with your <a href="https://rubygems.org/search?utf8=%E2%9C%93&amp;query=kitchen-" target="_new">desired driver</a> (Vagrant, Docker, AWS, OpenStack, etc), do a Chef client run of your cookbook and then test the changes (<code>kitchen test</code>) were applied or allow you to log in to the VM and check things out manually.  All of which is driven by the data in your .kitchen.yml file.
+To test our cookbook, we'll run <code>kitchen converge</code>.  It'll spin up your desired machine with your <a href="https://rubygems.org/search?utf8=%E2%9C%93&amp;query=kitchen-" target="_new">desired driver</a> (Vagrant, Docker, AWS, OpenStack, etc), fake out a Chef Server with Chef Zero (or use a real Chef Server if that's your thing), and do a Chef client run of your cookbook.<br />
+When that completes (barring any errors in your cookbook), test the changes with  <code>kitchen verify</code>. Or you can log in to the VM and check things out manually (<code>kitchen login</code>).  All of which is driven by the data in your .kitchen.yml file.
 </p>
 
 <h3><a name="to-follow" class="anchor" href="#to-follow"><span class="octicon octicon-link"></span></a>Chefs to follow on Twitter</h3>
@@ -121,7 +139,7 @@ We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef se
   <li><a href="https://twitter.com/tfitch" target="_new">Tyler Fitch</a></li>
   <li><a href="https://twitter.com/chef" target="_new">Chef</a></li>
 </ul>
-<h3><a name="podcasts" class="anchor" href="#podcasts"><span class="octicon octicon-link"></span></a>Podcasts to listen to</h3>  
+<h3><a name="podcasts" class="anchor" href="#podcasts"><span class="octicon octicon-link"></span></a>Podcasts to listen to</h3>
 <p>
   <a href="http://foodfightshow.org/" target="_new"><img src="./images/food-fight.jpeg" width="170" /> Food Fight Show</a>&nbsp;&nbsp;&nbsp;
   <a href="http://theshipshow.com" target="_new"><img src="./images/tss-logo.jpg" width="170" /> The Ship Show</a><br />
@@ -135,9 +153,12 @@ We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef se
 <ol>
   <li>Review the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/chef/automation-tools" target="_new">example cookbook</a> which you checked out during the Git session.</li>
   <li>Edit the <code>recipes/default.rb</code> file to install Apache 2 using the <code>apache2</code> <a href="https://docs.chef.io/resource_package.html" target="_new">package</a>.</li>
-  <li>Converge the node with Test Kitchen <code>kitchen converge</code></li>
+  <li>Converge the node with Test Kitchen <code>kitchen converge</code>. Note the output of the <code>chef-client</code> run.</li>
   <li>Browse to the VM in your browser: <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
-  <li>Connect to the VM via SSH (<code><a href="http://kitchen.ci/docs/getting-started/getting-help" target="_new">kitchen ???</a></code>) and then stop the Apache server from running <code>sudo service apache2 stop</code> and reload the webpage.</li>
+  <li>Connect to the VM via SSH (<code><a href="http://kitchen.ci/docs/getting-started/getting-help" target="_new">kitchen login</a></code>) and then stop the Apache server from running <code>sudo service apache2 stop</code> and logout. Reload the webpage (boo, nothing there).</li>
+  <li>Run <code>kitchen verify</code>. Does the test pass?
+  <li>Run <code>kitchen converge</code> again. How is the output from <code>chef-client</code> different this time?
+  <li>Run <code>kitchen verify</code> again. Does the test pass now?
   <li>Feel free to move on to more Chef topics with <a href="./chef-in-practice">Chef in Practice</a></li>
 </ol>
 
@@ -178,6 +199,6 @@ We're just going to run <code>kitchen converge</code>.  It'll fake out a Chef se
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  
+
   </body>
 </html>
