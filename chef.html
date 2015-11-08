@@ -157,7 +157,8 @@ When that completes (barring any errors in your cookbook), test the changes with
   <li>Converge the node with Test Kitchen <code>kitchen converge</code>. Note the output of the <code>chef-client</code> run.</li>
   <li>Browse to the VM in your browser: <a href="http://localhost:8080" target="_new">http://localhost:8080</a>.</li>
   <li>Connect to the VM via SSH (<code><a href="http://kitchen.ci/docs/getting-started/getting-help" target="_new">kitchen login</a></code>) and then stop the Apache server from running <code>sudo service apache2 stop</code> and logout. Reload the webpage (boo, nothing there).</li>
-  <li>Run <code>kitchen converge</code> again. How is the output from <code>chef-client</code> different this time? Is the site back up on <a href="http://localhost:8080" target="_new">http://localhost:8080</a>?
+  <li>Run <code>kitchen converge</code> again. How is the output from <code>chef-client</code> different this time? Is the site back up on <a href="http://localhost:8080" target="_new">http://localhost:8080</a>? If not, how do you make your recipe `convergent`?</li>
+  <li>Feeling TDDish? Run <code>kitchen verify</code> to test your state, tweak the test/integration/serverspec/default/default_spec.rb file to validate your system state.</li>
   <li>Feel free to move on to more Chef topics with <a href="./chef-in-practice">Chef in Practice</a></li>
 </ol>
 
