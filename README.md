@@ -35,4 +35,5 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
+* Ryosuke Morino
 * [Dave Rawks](https://github.com/drawks)
