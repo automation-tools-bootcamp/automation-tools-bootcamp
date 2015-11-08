@@ -50,18 +50,18 @@ Getting started with Docker requires a few things:<br />
   <li>Pick a container with your favorite technology from <a href="https://hub.docker.com/" target="_new">the Hub</a> to run.</li>
   <li><code>docker run  --name automation-tools-web -d -p 8080:8080 nginx</code> to start things up.</li>
 </ol>
-Your container is downloaded, deployed and running.<br />
+Your <em>image</em> is downloaded, deployed and running as a <em>container</em>.<br />
 <br />
 Did you think there'd be more?
 </p>
 
 <h3><a name="docker-repositories" class="anchor" href="#docker-repositories"><span class="octicon octicon-link"></span></a>Docker Hub/Repositories</h3>
 <p>
-Docker's ability to find public containers is based on using the <a href="https://hub.docker.com/" target="_new">Docker Hub</a>.  But you can run private registries as well, so you can keep your containers inside your firewall/data center.  Check out <a href="http://www.jfrog.com/confluence/display/RTF/Docker+Repositories" target="_new">Artifactory</a> to be your Docker Registry (and npm cache and Ruby Gem repo and Maven repo).  Artifactory is very helpful.<br />
+Docker's ability to find public containers is based on using the <a href="https://hub.docker.com/" target="_new">Docker Hub</a>.  But you can run private registries as well, so you can keep your Docker images inside your firewall/data center.  Check out <a href="http://www.jfrog.com/confluence/display/RTF/Docker+Repositories" target="_new">Artifactory</a> to be your Docker Registry (and npm cache and Ruby Gem repo and Maven repo).  Artifactory is very helpful.<br />
 <br />
-Application developers will maintain their own containers, so you just need to overlay your application code.  This can rapidly speed your development <em>and</em> deployment cycles.  When an application is updated, the provider will update their container and you'll get the new version of the app.<br />
+Application developers will maintain their own Docker images, so you just need to overlay your application code.  This can rapidly speed your development <em>and</em> deployment cycles.  When an application is updated, the provider will update their Docker image and you'll get the new version of the app.<br />
 <br />
-That said don't go trusting containers from out in the wild.
+That said don't go trusting images from out in the wild.
 <ul>
   <li>Test</li>
   <li>Verify</li>
@@ -71,23 +71,26 @@ That said don't go trusting containers from out in the wild.
   <li>Or...</li>
 </p>
 
-<h3><a name="build-your-container" class="anchor" href="#build-your-container"><span class="octicon octicon-link"></span></a>Building your own Docker container</h3>
+<h3><a name="build-your-image" class="anchor" href="#build-your-image"><span class="octicon octicon-link"></span></a>Building your own Docker image</h3>
 <p>
-A <a href="https://docs.docker.com/articles/dockerfile_best-practices/" target="_new">Dockerfile</a> will generate your own Container for you with your applications and even your code installed.<br />
+A <a href="https://docs.docker.com/articles/dockerfile_best-practices/" target="_new">Dockerfile</a> will generate your own Docker image for you with your applications and even your code installed.<br />
 <br />
-Container history is similar to a project's Git history.  Docker containers start from a read-only base image and then have (usually) small diffs as they are versioned.
+Docker image history is similar to a project's Git history.  Docker images start from a read-only base image and then have (usually) small diffs as they are versioned. You can view the changes with the <code>docker history &lt;image&gt;</code> command.
 <img src="./images/docker-filesystems-multilayer.png" /><br />
 The pieces of a Dockerfile:
 <ul>
-  <li><code>FROM</code> - which image your container will begin form.</li>
+  <li><code>FROM</code> - which image your build container will begin form.</li>
   <li><code>MAINTAINER</code> - you.  Own your work!</li>
-  <li><code>EXPOSE</code> - any ports you need opened up from the container.</li>
-  <li><code>RUN</code> - Run this command on the container.  A Dockerfile have mulitple <code>RUN</code> lines. Poor man's Config Management.</li>
-  <li><code>CMD</code> - command that will run when the container starts. Can be overrode from the command line.</li>
-  <li><code>ENTRYPOINT</code> - like <code>CMD</code> but *cannot* be overrode.</li>
-  <li><code>WORKDIR</code> - akin to using CD.</li>
-  <li><code>ADD</code> - adds files and directories from our build environment into our image. Can unpack archived files.</li>
-  <li><code>COPY</code> - like <code>ADD</code> but without extraction or decompression capabilities.</li>
+  <li><code>RUN</code> - Run this command on the build container.  A Dockerfile may have mulitple <code>RUN</code> lines. Poor man's Config Management (unless you RUN chef-client ;).</li>
+  <li><code>WORKDIR</code> - akin to using <code>cd</code>. Subsequent commands are exec'd in the WORKDIR</li>
+  <li><code>ADD</code> - adds files and directories from our <i>build context</i> into our image. Can unpack archived files.</li>
+  <li><code>COPY</code> - like <code>ADD</code> but without extraction or decompression capabilities.  Both COPY and ADD will also make parent directories if they don't already exist.</li></li>
+  <li><code>EXPOSE</code> - any ports you need opened up into the container. The <code>docker</code> command will later manage port mapping with the <code>-p</code> option at runtime.</li>
+  <li><code>CMD</code> - command that will run when the container starts. Can be overridden from the command line.</li>
+  <li><code>ENTRYPOINT</code> - like <code>CMD</code> but *cannot* be overridden, although options can be passed to the ENTRYPOINT.</li>
+</ul><br/>
+  Other pieces of a Dockerfile, which aren't applicable to our work today:
+  <ul>
   <li><code>VOLUME</code> - create a volume on the container. Often with data from the host.  Can be shared with multiple containers.</li>
   <li><code>USER</code> - specifies a user the image should be run as.</li>
   <li><code>ONBUILD</code> - executes a trigger (e.g. <code>ADD</code> or <code>COPY</code>) when the image is used as the basis for another image.</li>
@@ -102,7 +105,7 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
   <li><a href="http://docker.com" target="_new">Docker.com</a></li>
   <li><a href="https://github.com/docker/docker" target="_new">Docker GitHub</a> Check the open issues.  Fix the open issues.</li>
   <li><a href="http://docs.docker.com/userguide/" target="_new">Docker User Guide</a></li>
-  <li>The Docker Book</li>
+  <li>The Docker Book. $9.99 as an eBook. Worth it.</li>
 </ul>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=tylfit-20&marketplace=amazon&region=US&placement=B00LRROTI4&asins=B00LRROTI4&linkId=ZMXE6WA2B5FSEKGL&show_border=true&link_opens_in_new_window=true">
 </iframe>
@@ -112,21 +115,22 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
 
 <p>We are going to complete the following actions:</p>
 <ol>
-  <li><a href="https://docs.docker.com/installation/" target="_new">Install Docker</a> on your machine or use the provided <code>Vagrantfile</code> in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/docker" target="_new">code repo</a>.</li>
-  <li>Create a <a href="https://hub.docker.com/account/signup/" target="_new">Docker Hub account</a>.</li>
+  <li><a href="https://docs.docker.com/installation/" target="_new">Install Docker</a> on your machine or use the provided <code>Vagrantfile</code> in the <a href="https://github.com/tfitch/automation-tools-bootcamp/tree/master/docker" target="_new">code repo</a> with <code>vagrant up; vagrant ssh</code></li>
+  <li>Optional: Create a <a href="https://hub.docker.com/account/signup/" target="_new">Docker Hub account</a>.</li>
   <li>The Automation Tools git repo has a <code>docker</code> directory with a Dockerfile and small Node.js app.</li>
   <li>Make yourself the <code>MAINTAINER</code> of the Dockerfile.</li>
   <li>Use <code>RUN</code> to make a directory for your application in the container.</li>
-  <li><code>WORKDIR</code> to where you put the package.json file.</li>
-  <li><code>ADD</code> or <code>COPY</code> the <code>package.json</code> file to the container.</li>
+  <li><code>ADD</code> or <code>COPY</code> the <code>package.json</code> file to the application directory in the container.</li>
+  <li><code>ADD</code> or <code>COPY</code> the <code>app.js</code> file to the application directory in the image.</li>
+  <li><code>WORKDIR</code> specifies the directory where you put the package.json file.</li>
   <li><code>RUN</code> the command <code>npm install</code>.</li>
-  <li><code>ADD</code> or <code>COPY</code> the <code>app.js</code> file to the container.</li>
-  <li><code>CMD</code> or <code>ENTRYPOINT</code> the app with <code>npm start</code>.</li>
   <li>You'll want to <code>EXPOSE</code> port 3000 to view the sample app.</li>
-  <li>Make a <code>docker build</code> of the new container.  Tag it <code>-t &lt;userid&gt;/automation-tools-nodejs</code>.</li>
-  <li>Now it's time to <code>docker run</code> that new container.  <code>sudo docker run -it --rm -p=3000:3000 --name my-running-app &lt;userid&gt;/automation-tools-nodejs</code>.</li>
-  <li><a href="http://localhost:3000" target="_new">View the app in your browser</a>.</li>
-  <li>Use <code>docker push &lt;userid&gt;/automation-tools-nodejs</code> to upload you image to the Docker Hub.</li>
+  <li><code>CMD</code> or <code>ENTRYPOINT</code> the app with <code>npm start</code>.</li>
+  <li>Make a <code>docker build</code> of the new image.  Tag it <code>-t &lt;userid&gt;/automation-tools-nodejs</code>.</li>
+  <li>Now it's time to <code>docker run</code> that new image as a container.  <code>sudo docker run -it --rm -p=3000:3000 &lt;userid&gt;/automation-tools-nodejs</code>.</li>
+  <li><a href="http://localhost:3000" target="_new">View the app in your browser</a>. If you're using DockerToolkit that may be http://DOCKERHOST:3000</li>
+  <li>Since the container is not daemonized (which you'd do with the <code>-d</code> switch, instead of <code>-i -t</code> switches), use Ctrl-C to kill <code>npm start</code> and exit the container</li>
+  <li>Optional: Use <code>docker push &lt;userid&gt;/automation-tools-nodejs</code> to upload your image to the Docker Hub. You may need to run <code>docker login</code> first.</li>
 </ol>
         </section>
 
@@ -163,6 +167,6 @@ This is the tip of the iceberg for Docker.  Go forth and learn more!
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  
+
   </body>
 </html>
