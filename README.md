@@ -33,4 +33,4 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
-* Jeremy Hayden
+* Jeremy Hayden 
