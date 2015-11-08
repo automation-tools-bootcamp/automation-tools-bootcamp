@@ -34,3 +34,4 @@ Project Participants
 * Derrick
 * Erik Peterson
 * Graham Dunn
+* A Very Famous Person
