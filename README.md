@@ -31,5 +31,6 @@ Project Participants
 * Paul English
 * Joseph Chilcote
 * James Kolafa
+* Jeremy Morse
 * Derrick
 * Erik Peterson
