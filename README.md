@@ -36,3 +36,4 @@ Project Participants
 * Derrick
 * Erik Peterson
 * [Dave Rawks](https://github.com/drawks)
+* Dom D'Alessandro
