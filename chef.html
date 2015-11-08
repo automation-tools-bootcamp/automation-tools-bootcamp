@@ -35,7 +35,7 @@
 
 <h3><a name="why-chef" class="anchor" href="#why-chef"><span class="octicon octicon-link"></span></a>What problems does Chef solve?</h3>
 
-Chef is an <em>Infrastructure Automation Frameworks</em>, so that it's more than a tool, a language or a single product. The issues Chef addresses include:
+Chef is an <em>Infrastructure Automation Framework</em>, so that it's more than a tool, a language or a single product. The issues Chef addresses include:
 <ul>
   <li>How to specify what a system does as a description of state, instead of an aggregation of Bash/Perl/Python scripts.
   <li>How to maintain many systems over time in a consistent, repeatable manner (where 'many' is anywhere between 1 and 250,000)
@@ -81,7 +81,7 @@ Starting analogy: "Chef is to systems as yum/apt are to package management"
 
 <p>All of the configuration of your node is done by the <em>Chef Client</em>. That client (sometimes called an agent) processes a <em>runlist</em> of cookbooks, evaluates them based on the node's <em>attributes</em>, and then fixes any resources on the node that aren't yet matching the cookbook description.</p>
 
-<p>The Chef Server stores the cookbooks and node information for Chef Clients. The Chef Client's interacts with the Chef Server over a REST API, and when you need to update cookbooks or other site information you use that API too, through tools like <em>knife</em> or the server's web Manage UI.</p>
+<p>The Chef Server stores the cookbooks and node information for Chef Clients. The Chef Clients interact with the Chef Server over a REST API, and when you need to update cookbooks or other site information you use that API too, through tools like <em>knife</em> or the server's web Manage UI.</p>
 
 <p>Whether you are using <code>knife</code> or the Chef Server's Manage UI, they will end up showing you the same information as gathered from the Server via those REST API requests.  In some mature Chef environments users will not even have the Chef Manage UI installed on their Chef Server and instead they just use <code>knife</code> commands to request the information they need to know about their Chef managed nodes.</p>
 
@@ -137,6 +137,7 @@ When that completes (barring any errors in your cookbook), test the changes with
   <li><a href="https://twitter.com/sigje" target="_new">Jennifer Davis</a></li>
   <li><a href="https://twitter.com/fnichol" target="_new">Fletcher Nichol</a></li>
   <li><a href="https://twitter.com/tfitch" target="_new">Tyler Fitch</a></li>
+  <li><a href="https://twitter.com/pburkholder" target="_new">Peter Burkholder</a></li>
   <li><a href="https://twitter.com/chef" target="_new">Chef</a></li>
 </ul>
 <h3><a name="podcasts" class="anchor" href="#podcasts"><span class="octicon octicon-link"></span></a>Podcasts to listen to</h3>
