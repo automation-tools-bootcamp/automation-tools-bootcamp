@@ -1,0 +1,116 @@
+{
+  "variables": {
+    "iso_url": "http://releases.ubuntu.com/releases/trusty/ubuntu-14.04.3-server-amd64.iso",
+    "iso_checksum": "9e5fecc94b3925bededed0fdca1bd417",
+    "iso_checksum_type": "md5",
+    "headless": "true",
+    "version": "1.0.0",
+    "build_number": "1"
+  },
+  "builders": [
+    {
+      "name": "vmware",
+      "type": "vmware-iso",
+      "vm_name": "trusty64",
+
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": "22",
+      "ssh_wait_timeout": "30m",
+
+      "guest_os_type": "other",
+      "headless": "{{user `headless`}}",
+      "boot_wait": "10s",
+      "disk_type_id": 0,
+      "vmdk_name": "disk",
+      "http_directory" : "http",
+      "http_port_min" : 9001,
+      "http_port_max" : 9001,
+
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'devvm'|sudo -S sh 'shutdown.sh'",
+      "vmx_data": {
+        "memsize": "2048",
+        "numvcpus":"2",
+        "tools.upgrade.policy": "manual"
+      }
+    }, {
+      "name": "virtualbox",
+      "type": "virtualbox-iso",
+      "vm_name": "trusty64",
+
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": "22",
+      "ssh_wait_timeout": "30m",
+
+      "guest_os_type": "Ubuntu_64",
+      "guest_additions_path": "VBoxGuestAdditions.iso",
+      "guest_additions_mode": "upload",
+      "headless": "{{user `headless`}}",
+      "boot_wait": "10s",
+      "http_directory" : "http",
+      "http_port_min" : 9001,
+      "http_port_max" : 9001,
+
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'devvm'|sudo -S sh 'shutdown.sh'",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant-user.sh",
+        "scripts/vagrant-ubuntu-update.sh",
+        "scripts/vagrant-ubuntu.sh",
+        "scripts/vagrant-sshkey.sh",
+        "scripts/install_tools.sh"
+      ],
+      "execute_command": "echo 'vagrant' | sudo -S sh '{{ .Path }}'"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox"],
+      "output": "trusty64-{{user `version`}}-{{user `build_number`}}.box"
+    }, {
+      "type": "vagrant",
+      "only": ["vmware"],
+      "output": "trusty64-{{user `version`}}-{{user `build_number`}}_vmware.box"
+    }
+  ]
+}
