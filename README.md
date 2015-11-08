@@ -33,3 +33,9 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
+
+-
+Training Session Participants
+=============================
+
+* Atif Sheikh
