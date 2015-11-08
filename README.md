@@ -17,6 +17,8 @@ Benefits of the bootcamp:
 * Be a polyglot (if you're not already). You'll end up using Markdown, Ruby (for Chef) and JavaScript (for Node.js) while going through these lessons. This is a good thing.
 * Learning is often more fun when it is collaborative.
 
+* TEST 
+* 
 Project Participants
 ====================
 
@@ -33,4 +35,5 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
-* Craig Sebenik
+* [Dave Rawks](https://github.com/drawks)
+* [Craig Sebenik](https://github.com/craig5)
