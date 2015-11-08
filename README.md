@@ -36,4 +36,4 @@ Project Participants
 * Derrick
 * Erik Peterson
 * [Dave Rawks](https://github.com/drawks)
-* Chuck Forsyth
+* Chuck Forsyth-
