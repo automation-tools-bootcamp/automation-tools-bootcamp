@@ -62,3 +62,4 @@ Project Participants
 * Atif Sheikh
 * Marco Induni
 * Bert Cosemans
+* Stephen Schaefer
