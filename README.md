@@ -47,3 +47,4 @@ Project Participants
 * Santiago del Castillo
 * [Craig Sebenik](https://github.com/craig5)
 * Jeremy Hayden 
+* Joseph Pippin
