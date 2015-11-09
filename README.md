@@ -73,3 +73,4 @@ Project Participants
 * Johann Agnarsson
 * Amir Gonen
 * Derrick Smith
+* Dom D'Alessandro
