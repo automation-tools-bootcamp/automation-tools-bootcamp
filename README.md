@@ -57,3 +57,4 @@ Project Participants
 * Pedro Oliveira
 * Ahmed Bu-khamsin
 * William Koontz
+* Ron Peters
