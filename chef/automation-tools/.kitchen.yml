@@ -6,7 +6,8 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
+  #- name: ubuntu-12.04
+  - name: precise32
     driver_config:
       network:
       - ["forwarded_port", {guest: 80, host: 8080, auto_correct: true}]

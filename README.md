@@ -35,6 +35,8 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
+* Graham Dunn
+* A Very Famous Person
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
 * Kripa Faraday
