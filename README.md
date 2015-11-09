@@ -74,3 +74,4 @@ Project Participants
 * Amir Gonen
 * Derrick Smith
 * Dom D'Alessandro
+* David Kiel
