@@ -46,3 +46,4 @@ Project Participants
 * Peter Morson
 * Santiago del Castillo
 * [Craig Sebenik](https://github.com/craig5)
+* Jeremy Hayden 
