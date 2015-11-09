@@ -56,3 +56,4 @@ Project Participants
 * Anders K. Pedersen
 * Pedro Oliveira
 * Ahmed Bu-khamsin
+* William Koontz
