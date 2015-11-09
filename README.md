@@ -69,3 +69,4 @@ Project Participants
 * Ryan M
 * Thao Bui
 * Derek Balling
+* Johann Agnarsson
