@@ -52,3 +52,4 @@ Project Participants
 * David Rivenburg
 * Tim Gagnon
 * Tivon Luker
+* Alan Silver
