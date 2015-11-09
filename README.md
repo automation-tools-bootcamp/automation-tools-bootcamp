@@ -35,6 +35,7 @@ Project Participants
 * James Kolafa
 * Derrick
 * Erik Peterson
+* Grant Irvin
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
 * Kripa Faraday
