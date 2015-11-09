@@ -49,3 +49,4 @@ Project Participants
 * Jeremy Hayden 
 * Joseph Pippin
 * Carl Halstensen
+* David Rivenburg
