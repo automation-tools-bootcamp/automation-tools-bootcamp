@@ -72,3 +72,4 @@ Project Participants
 * Derek Balling
 * Johann Agnarsson
 * Amir Gonen
+* Derrick Smith
