@@ -55,3 +55,4 @@ Project Participants
 * Alan Silver
 * Anders K. Pedersen
 * Pedro Oliveira
+* Ahmed Bu-khamsin
