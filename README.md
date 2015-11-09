@@ -60,3 +60,4 @@ Project Participants
 * Ron Peters
 * Amy Rich
 * Atif Sheikh
+* Marco Induni
