@@ -37,3 +37,4 @@ Project Participants
 * Erik Peterson
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
+* Kripa Faraday
