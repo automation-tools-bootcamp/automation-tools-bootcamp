@@ -37,6 +37,7 @@ Project Participants
 * Derrick
 * Erik Peterson
 * Grant Irvin
+* Ryosuke Morino
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
 * Kripa Faraday
