@@ -50,3 +50,4 @@ Project Participants
 * Joseph Pippin
 * Carl Halstensen
 * David Rivenburg
+* Tim Gagnon
