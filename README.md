@@ -70,3 +70,4 @@ Project Participants
 * Thao Bui
 * Derek Balling
 * Johann Agnarsson
+* Amir Gonen
