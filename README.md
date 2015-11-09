@@ -38,3 +38,4 @@ Project Participants
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
 * Kripa Faraday
+* Thomas Leyer
