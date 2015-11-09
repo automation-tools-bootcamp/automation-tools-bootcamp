@@ -58,3 +58,4 @@ Project Participants
 * Ahmed Bu-khamsin
 * William Koontz
 * Ron Peters
+* Amy Rich
