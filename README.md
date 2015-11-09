@@ -48,3 +48,4 @@ Project Participants
 * [Craig Sebenik](https://github.com/craig5)
 * Jeremy Hayden 
 * Joseph Pippin
+* Carl Halstensen
