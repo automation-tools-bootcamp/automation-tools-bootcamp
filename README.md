@@ -45,3 +45,4 @@ Project Participants
 * Andy Georges
 * Peter Morson
 * Santiago del Castillo
+* [Craig Sebenik](https://github.com/craig5)
