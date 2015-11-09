@@ -54,3 +54,4 @@ Project Participants
 * Tivon Luker
 * Alan Silver
 * Anders K. Pedersen
+* Pedro Oliveira
