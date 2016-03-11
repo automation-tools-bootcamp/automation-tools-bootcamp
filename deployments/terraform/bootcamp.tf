@@ -17,3 +17,16 @@ resource "docker_container" "atb" {
   name = "atb-${count.index}"
 }
 
+# and now front it all with a haproxy container
+resource "docker_image" "haproxy" {
+  name = "tutum/haproxy:latest"
+}
+
+resource "docker_container" "haproxy" {
+  depends_on = ["docker_container.hello-world"]
+  image = "${docker_image.haproxy.latest}"
+  ports = {external = 8086
+           internal = 8085}
+  links = ["${docker_container.atb.*.name}"]
+  name = "haproxy"
+}
