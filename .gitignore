@@ -4,3 +4,4 @@
 node_modules/
 *.box
 .DS_Store
+packer_cache
