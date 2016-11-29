@@ -1,0 +1,80 @@
+{
+  "variables": {
+    "iso_url": "./ubuntu-14.04.5-server-amd64.iso",
+    "iso_checksum": "dd54dc8cfc2a655053d19813c2f9aa9f",
+    "iso_checksum_type": "md5",
+    "headless": "true",
+    "version": "1.0.0",
+    "build_number": "1"
+  },
+  "builders": [
+    {
+      "name": "virtualbox",
+      "type": "virtualbox-iso",
+      "vm_name": "trusty64",
+
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": "22",
+      "ssh_wait_timeout": "10000s",
+
+      "guest_os_type": "Ubuntu_64",
+      "guest_additions_path": "VBoxGuestAdditions.iso",
+      "guest_additions_mode": "upload",
+      "headless": "{{user `headless`}}",
+      "boot_wait": "10s",
+      "http_directory" : "http",
+      "http_port_min" : 9001,
+      "http_port_max" : 9001,
+
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'devvm'|sudo -S sh 'shutdown.sh'",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant-ubuntu-update.sh",
+        "scripts/sshd.sh",
+        "scripts/vagrant-user.sh",
+        "scripts/vagrant-ubuntu.sh",
+        "scripts/vagrant-sshkey.sh",
+        "scripts/install_tools.sh",
+        "scripts/atb-deployments.sh",
+        "scripts/docker-pulls.sh"
+      ],
+      "execute_command": "echo 'vagrant' | sudo -S sh '{{ .Path }}'"
+    },
+    {
+      "type": "file",
+      "source": "{{pwd}}/files/.tmux.conf",
+      "destination": "/home/vagrant/.tmux.conf"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["virtualbox"],
+      "output": "atb-example-{{user `version`}}_vbox.box"
+    }
+  ]
+}
