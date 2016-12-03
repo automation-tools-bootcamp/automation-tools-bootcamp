@@ -1,6 +1,6 @@
 {
   "variables": {
-    "iso_url": "./ubuntu-14.04.5-server-amd64.iso",
+    "iso_url": "../boxes/ubuntu-14.04.5-server-amd64.iso",
     "iso_checksum": "dd54dc8cfc2a655053d19813c2f9aa9f",
     "iso_checksum_type": "md5",
     "headless": "true",
@@ -44,7 +44,7 @@
       ],
       "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'devvm'|sudo -S sh 'shutdown.sh'",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
         ["modifyvm", "{{.Name}}", "--cpus", "2"]
       ]
     }
@@ -59,7 +59,7 @@
         "scripts/vagrant-ubuntu.sh",
         "scripts/vagrant-sshkey.sh",
         "scripts/install_tools.sh",
-        "scripts/atb-deployments.sh",
+        "scripts/bootcamp-tools.sh",
         "scripts/docker-pulls.sh"
       ],
       "execute_command": "echo 'vagrant' | sudo -S sh '{{ .Path }}'"
