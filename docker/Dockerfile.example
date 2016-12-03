@@ -1,13 +1,15 @@
 # Version: 0.0.1
 FROM node:0.10
 MAINTAINER Tyler Fitch "automationtools@tfitch.com"
-EXPOSE 3000
+EXPOSE 8085
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/src
+WORKDIR /usr/src
 
-COPY package.json /usr/src/app/
+# Clone the conf files into the docker container
+RUN git clone https://github.com/automation-tools-bootcamp/example-nodejs-app.git
+
+WORKDIR /usr/src/example-nodejs-app
 RUN npm install
-COPY app.js /usr/src/app/
 
 CMD [ "npm", "start" ]
