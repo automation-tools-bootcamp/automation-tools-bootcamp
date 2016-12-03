@@ -4,7 +4,7 @@
     "iso_checksum": "dd54dc8cfc2a655053d19813c2f9aa9f",
     "iso_checksum_type": "md5",
     "headless": "true",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "build_number": "1"
   },
   "builders": [
@@ -59,7 +59,7 @@
         "scripts/vagrant-ubuntu.sh",
         "scripts/vagrant-sshkey.sh",
         "scripts/install_tools.sh",
-        "scripts/atb-deployments.sh",
+        "scripts/bootcamp-tools.sh",
         "scripts/docker-pulls.sh"
       ],
       "execute_command": "echo 'vagrant' | sudo -S sh '{{ .Path }}'"
@@ -74,7 +74,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox"],
-      "output": "atb-{{user `version`}}_vbox.box"
+      "output": "atb-lisa-2016-{{user `version`}}_vbox.box"
     }
   ]
 }
