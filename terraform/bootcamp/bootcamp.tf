@@ -23,7 +23,7 @@ resource "docker_image" "haproxy" {
 }
 
 resource "docker_container" "haproxy" {
-  depends_on = ["docker_container.hello-world"]
+  depends_on = ["docker_container.atb"]
   image = "${docker_image.haproxy.latest}"
   ports = {external = 8086
            internal = 8085}
