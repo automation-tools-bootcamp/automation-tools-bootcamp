@@ -26,7 +26,7 @@ resource "docker_container" "haproxy" {
   depends_on = ["docker_container.atb"]
   image = "${docker_image.haproxy.latest}"
   ports = {external = 8086
-           internal = 8085}
+           internal = 80}
   links = ["${docker_container.atb.*.name}"]
   name = "haproxy"
 }
