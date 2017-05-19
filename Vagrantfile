@@ -18,9 +18,9 @@ Vagrant.configure("2") do |config|
   # https://docs.vagrantup.com.
 
   # If you're on a decent Internet connection download the box from Hashicorp
-  # config.vm.box = "automationtools/atb-lisa-2016" 
-  config.vm.box = "atb-lisa-2016"
-  config.vm.box_url = "./boxes/atb-lisa-2016-1.0.3_vbox.box"
+  # config.vm.box = "automationtools/atb-lisa-2016"
+  config.vm.box = "atb-chefconf-2017"
+  config.vm.box_url = "./boxes/atb-chefconf-2017-1.0.1_vbox.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,

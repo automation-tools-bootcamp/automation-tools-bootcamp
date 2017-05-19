@@ -25,14 +25,14 @@ wget -O /home/vagrant/jenkins/jenkins.war http://mirrors.jenkins.io/war-stable/l
 chown -R vagrant:vagrant /home/vagrant/jenkins
 
 # install Terraform
-wget https://releases.hashicorp.com/terraform/0.7.13/terraform_0.7.13_linux_amd64.zip
+wget https://releases.hashicorp.com/terraform/0.9.5/terraform_0.9.5_linux_amd64.zip
 mkdir -p /usr/local/terraform/bin
-unzip terraform_0.7.13_linux_amd64.zip -d /usr/local/terraform/bin
+unzip terraform_0.9.5_linux_amd64.zip -d /usr/local/terraform/bin
 
 # install Packer
-wget https://releases.hashicorp.com/packer/0.12.0/packer_0.12.0_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/1.0.0/packer_1.0.0_linux_amd64.zip
 mkdir -p /usr/local/packer/bin
-unzip packer_0.12.0_linux_amd64.zip -d /usr/local/packer/bin
+unzip packer_1.0.0_linux_amd64.zip -d /usr/local/packer/bin
 
 # setup steps for Artifactory and Jenkins
 mkdir -p /var/opt/jfrog/artifactory
@@ -47,8 +47,8 @@ curl https://omnitruck.chef.io/install.sh | bash -s -- -c stable -P chefdk
 # wget http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~trusty_amd64.deb
 # dpkg -i virtualbox-5.1_5.1.10-112026~Ubuntu~trusty_amd64.deb
 apt-get install -y virtualbox-5.1
-wget https://releases.hashicorp.com/vagrant/1.9.0/vagrant_1.9.0_x86_64.deb
-dpkg -i vagrant_1.9.0_x86_64.deb
+wget https://releases.hashicorp.com/vagrant/1.9.5/vagrant_1.9.5_x86_64.deb
+dpkg -i vagrant_1.9.5_x86_64.deb
 
 # install Node.js because it's nice to have around
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
