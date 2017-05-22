@@ -36,6 +36,7 @@ Project Participants
 * Jeremy Morse
 * Derrick
 * Erik Peterson
+* Holden Smith
 * Grant Irvin
 * Ryosuke Morino
 * [Dave Rawks](https://github.com/drawks)
