@@ -58,16 +58,9 @@
         "scripts/vagrant-user.sh",
         "scripts/vagrant-ubuntu.sh",
         "scripts/vagrant-sshkey.sh",
-        "scripts/install_tools.sh",
-        "scripts/bootcamp-tools.sh",
-        "scripts/docker-pulls.sh"
+        "scripts/install_tools.sh"
       ],
       "execute_command": "echo 'vagrant' | sudo -S sh '{{ .Path }}'"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/files/.tmux.conf",
-      "destination": "/home/vagrant/.tmux.conf"
     }
   ],
   "post-processors": [
