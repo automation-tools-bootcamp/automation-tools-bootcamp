@@ -4,7 +4,6 @@ variable "count" {
 }
 
 # define what container we are going to use
-# and pull it from our Artifactory Docker registry (localhost:5002)
 resource "docker_image" "hello-world" {
   name = "tutum/hello-world:latest"
 }
