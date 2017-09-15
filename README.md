@@ -89,6 +89,7 @@ Project Participants
 * Chuck Forsyth-
 * Aaron Root
 * Peter Downs
+* James Wood
 * Adhip Joshi
 * Jose Rizo
 * [Chandan Rupakheti](https://github.com/chandanrrk)
