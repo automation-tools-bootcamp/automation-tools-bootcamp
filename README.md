@@ -17,30 +17,38 @@ Benefits of the bootcamp:
 * Be a polyglot (if you're not already). You'll end up using Markdown, Ruby (for Chef) and JavaScript (for Node.js) while going through these lessons. This is a good thing.
 * Learning is often more fun when it is collaborative.
 
-* TEST 
-* 
+* TEST
+*
 Project Participants
 ====================
 
 * Tyler Fitch
+* Michael Wolcott
 * Jeff Korthuis
 * Daniel Rich
 * Gilbert Wilson
 * N.J. Thomas
+* Ted Waggoner
+* Mo Ali
 * Trevor Leffler
+* Jacob Zaval
 * Jason Howe
 * jgaski
 * Paul English
+* Janna Loeffler
 * Joseph Chilcote
 * James Kolafa
 * Jeremy Morse
 * Derrick
+* David Min
 * Erik Peterson
+* Holden Smith
 * Grant Irvin
 * Ryosuke Morino
 * [Dave Rawks](https://github.com/drawks)
 * Graham Dunn
 * Kripa Faraday
+* Eric Bittner
 * Thomas Leyer
 * Willy Lee
 * Steve Webb
@@ -49,7 +57,7 @@ Project Participants
 * Peter Morson
 * Santiago del Castillo
 * [Craig Sebenik](https://github.com/craig5)
-* Jeremy Hayden 
+* Jeremy Hayden
 * Joseph Pippin
 * Carl Halstensen
 * David Rivenburg
@@ -58,6 +66,7 @@ Project Participants
 * Alan Silver
 * Anders K. Pedersen
 * Pedro Oliveira
+* Oralee Nudson
 * Ahmed Bu-khamsin
 * William Koontz
 * Ron Peters
@@ -80,4 +89,10 @@ Project Participants
 * Chuck Forsyth-
 * Aaron Root
 * Peter Downs
+* James Wood
+* Adhip Joshi
+* Jose Rizo
+* [Chandan Rupakheti](https://github.com/chandanrrk)
+* Morgan Todd
+* Josh Johnson
 * Mamatha Singh
