@@ -94,3 +94,4 @@ Project Participants
 * Jose Rizo
 * [Chandan Rupakheti](https://github.com/chandanrrk)
 * Morgan Todd
+* Josh Johnson
