@@ -28,6 +28,7 @@ Project Participants
 * Daniel Rich
 * Gilbert Wilson
 * N.J. Thomas
+* Ted Waggoner
 * Mo Ali
 * Trevor Leffler
 * Jacob Zaval
