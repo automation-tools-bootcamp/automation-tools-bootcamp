@@ -89,6 +89,7 @@ Project Participants
 * Chuck Forsyth-
 * Aaron Root
 * Peter Downs
+* Jay Krause
 * Justin Smith
 * Nick Johnson
 * James Wood
