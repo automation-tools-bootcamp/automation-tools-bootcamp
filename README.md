@@ -27,6 +27,7 @@ Project Participants
 * Daniel Rich
 * Gilbert Wilson
 * N.J. Thomas
+* Mo Ali
 * Trevor Leffler
 * Jacob Zaval
 * Jason Howe
