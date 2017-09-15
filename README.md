@@ -89,6 +89,7 @@ Project Participants
 * Chuck Forsyth-
 * Aaron Root
 * Peter Downs
+* Nick Johnson
 * James Wood
 * Adhip Joshi
 * Jose Rizo
