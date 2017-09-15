@@ -95,3 +95,4 @@ Project Participants
 * [Chandan Rupakheti](https://github.com/chandanrrk)
 * Morgan Todd
 * Josh Johnson
+* Mamatha Singh
