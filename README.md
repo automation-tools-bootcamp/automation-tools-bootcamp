@@ -39,6 +39,7 @@ Project Participants
 * James Kolafa
 * Jeremy Morse
 * Derrick
+* David Min
 * Erik Peterson
 * Holden Smith
 * Grant Irvin
