@@ -1,22 +1,22 @@
 ---
 driver:
-  name: vagrant
+  name: dokken
+  chef_version: latest
+
+transport:
+  name: dokken
 
 provisioner:
-  name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
-  #   always_update_cookbooks: <%= !ENV['CI'] %>
-  always_update_cookbooks: true
+  name: dokken
 
 verifier:
   name: inspec
 
 platforms:
-  - name: trusty-server-32
-    driver:
-      box: trusty-server-32
-      box_url: "/vagrant/boxes/trusty-server-32.box"
+- name: ubuntu-16.04
+  driver:
+    image: dokken/ubuntu-16.04
+    ports: "8443:8443"
 
 suites:
   - name: default
@@ -24,5 +24,5 @@ suites:
       - recipe[bootcamp::default]
     verifier:
       inspec_tests:
-        - test/recipes
+        - test/smoke/default
     attributes:

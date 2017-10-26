@@ -9,3 +9,5 @@ docker pull node:latest
 docker pull node:0.10
 docker pull tutum/hello-world:latest
 docker pull tutum/haproxy:latest
+docker pull chef/chef:latest
+docker pull ubuntu:16.04

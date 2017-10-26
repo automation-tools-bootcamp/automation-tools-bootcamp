@@ -19,19 +19,19 @@ Vagrant.configure("2") do |config|
 
   # If you're on a decent Internet connection download the box from Hashicorp
   # config.vm.box = "automationtools/atb-lisa-2016"
-  config.vm.box = "atb-chefconf-2017"
-  config.vm.box_url = "./boxes/atb-chefconf-2017-1.0.1_vbox.box"
+  config.vm.box = "atb-lisa-2017"
+  config.vm.box_url = "./boxes/builds/ubuntu-16.04.virtualbox.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
-  config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
   config.vm.network "forwarded_port", guest: 80, host: 80, auto_correct: true
   config.vm.network "forwarded_port", guest: 443, host: 443, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
   config.vm.network "forwarded_port", guest: 5000, host: 5000, auto_correct: true
   config.vm.network "forwarded_port", guest: 5001, host: 5001, auto_correct: true
   config.vm.network "forwarded_port", guest: 5002, host: 5002, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
   config.vm.network "forwarded_port", guest: 8081, host: 8081, auto_correct: true
   config.vm.network "forwarded_port", guest: 8082, host: 8082, auto_correct: true
   config.vm.network "forwarded_port", guest: 8083, host: 8083, auto_correct: true
@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8087, host: 8087, auto_correct: true
   config.vm.network "forwarded_port", guest: 8088, host: 8088, auto_correct: true
   config.vm.network "forwarded_port", guest: 8089, host: 8089, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8443, host: 8443, auto_correct: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
