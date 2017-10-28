@@ -2,4 +2,4 @@ This file is just a place holder so the directory will exist for attendees of th
 
 git clone https://github.com/dev-sec/linux-patch-benchmark.git
 
-git clone https://github.com/dev-sec/tests-os-hardening.git
+git clone https://github.com/dev-sec/linux-baseline

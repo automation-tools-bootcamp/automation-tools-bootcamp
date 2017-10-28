@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   # If you're on a decent Internet connection download the box from Hashicorp
   config.vm.box = "automationtools/atb-lisa-2017"
   # config.vm.box = "atb-lisa-2017"
-  # config.vm.box_url = "./boxes/builds/ubuntu-16.04.virtualbox.box"
+  # config.vm.box_url = "./boxes/atb-lisa-2017-1.0.0_vbox.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
