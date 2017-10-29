@@ -30,6 +30,7 @@ Project Participants
 * N.J. Thomas
 * Ted Waggoner
 * Mo Ali
+* Tori Wieldt (https://github.com/LuckyJackAubrey )
 * Trevor Leffler
 * Jacob Zaval
 * Jason Howe
