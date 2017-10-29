@@ -32,6 +32,7 @@ Project Participants
 * Mo Ali
 * Trevor Leffler
 * Jacob Zaval
+* Michael Englehorn
 * Jason Howe
 * jgaski
 * Paul English
