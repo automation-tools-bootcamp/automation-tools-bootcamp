@@ -32,6 +32,7 @@ Project Participants
 * Mo Ali
 * Trevor Leffler
 * Jacob Zaval
+* Jacob Perkins
 * Jason Howe
 * jgaski
 * Paul English
