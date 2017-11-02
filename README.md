@@ -30,8 +30,11 @@ Project Participants
 * N.J. Thomas
 * Ted Waggoner
 * Mo Ali
+* Tori Wieldt (https://github.com/LuckyJackAubrey )
 * Trevor Leffler
 * Jacob Zaval
+* Jacob Perkins
+* Michael Englehorn
 * Jason Howe
 * jgaski
 * Paul English
@@ -100,4 +103,5 @@ Project Participants
 * Morgan Todd
 * Josh Johnson
 * Mamatha Singh
+* Rose Nancy
 * Prashanth Guduru
