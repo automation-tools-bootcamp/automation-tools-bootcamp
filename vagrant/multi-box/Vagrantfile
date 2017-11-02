@@ -12,10 +12,10 @@ Vagrant.configure("2") do |config|
   end
 
   # Every Vagrant virtual environment requires a box to build off of.
-#  config.vm.box = "ubuntu/trusty32"
+  config.vm.box = "ubuntu/trusty32"
 # swap these lines when in class with local .box files
-  config.vm.box = "trusty-server-32"
-  config.vm.box_url = "../../boxes/trusty-server-32.box"
+#  config.vm.box = "trusty-server-32"
+#  config.vm.box_url = "../../boxes/trusty-server-32.box"
 
   # the path to the one-time boot/installer script (until it is moved to Chef)
   config.vm.provision :shell, :path => "../bootstrap.sh"
