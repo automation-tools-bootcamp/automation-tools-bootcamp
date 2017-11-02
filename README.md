@@ -33,6 +33,7 @@ Project Participants
 * Tori Wieldt (https://github.com/LuckyJackAubrey )
 * Trevor Leffler
 * Jacob Zaval
+* Jacob Perkins
 * Michael Englehorn
 * Jason Howe
 * jgaski
