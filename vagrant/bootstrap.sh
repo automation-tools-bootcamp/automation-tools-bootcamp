@@ -8,6 +8,7 @@
 test -f /etc/bootstrapped && exit
 
 # webserver please
+sudo apt-get update
 sudo apt-get install -y apache2
 # I dislike dealing with Firewall issues in dev - turn them off
 iptables -F
